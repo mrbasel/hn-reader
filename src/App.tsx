@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { ChakraProvider, Heading } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
+
+import PostsList from "./components/PostsList";
 
 function App() {
-  return <ChakraProvider>
-    <Heading textAlign="center">Hello World</Heading>
-  </ChakraProvider>;
+  return (
+    <ChakraProvider>
+      <PostsList />
+    </ChakraProvider>
+  );
 }
 export default App;
