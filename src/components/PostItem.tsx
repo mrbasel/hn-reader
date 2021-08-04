@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack, Link, Text } from "@chakra-ui/react";
 
 function PostItem(props: any) {
   return (
@@ -11,11 +11,11 @@ function PostItem(props: any) {
         textAlign="left"
       >
         <Heading as="h3" size="md">
-          {props.title}
+          <Link href={props.link}>{props.title}</Link>
         </Heading>
         <Box>
           <Text display="inline" mr="2" fontWeight="bold" color="gray">
-            /news
+            /{props.type}
           </Text>
           <Text display="inline" color="gray">
             by {props.author}
@@ -23,7 +23,12 @@ function PostItem(props: any) {
         </Box>
         <HStack spacing="4">
           <Text color="whiteAlpha.700">{props.points} points</Text>
-          <Text color="whiteAlpha.700">{props.comments} comments</Text>
+          <Link
+            href={`https://news.ycombinator.com/item?id=${props.id}`}
+            color="whiteAlpha.700"
+          >
+            {props.comments} comments
+          </Link>
           <Text color="whiteAlpha.700">Share</Text>
         </HStack>
       </Flex>
