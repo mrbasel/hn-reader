@@ -1,25 +1,37 @@
 import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import PostItem from "./PostItem";
 
+interface Post {
+  id: Number;
+  url: String;
+  title: String;
+  by: String;
+  score: Number;
+  descendants: Number;
+  type: String;
+}
+
 function PostsList(props: any) {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
     axios
-      .get("https://hacker-news.firebaseio.com/v0/topstories.json")
+      .get<Number[]>("https://hacker-news.firebaseio.com/v0/topstories.json")
       .then((res) =>
         Promise.all(
           res.data
-            .slice(0, 30)
+            .slice(0, 10)
             .map((id: Number) =>
-              axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+              axios.get<Post>(
+                `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+              )
             )
         )
       )
-      .then((data: any) => {
-        setPosts(data);
+      .then((data: AxiosResponse[]) => {
+        setPosts(data.map((post) => post.data));
       });
   }, []);
 
@@ -27,15 +39,15 @@ function PostsList(props: any) {
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
       {posts.map((post, i) => (
         <PostItem
-          key={post.data.id}
-          id={post.data.id}
+          key={post.id}
+          id={post.id}
           index={i + 1}
-          link={post.data.url}
-          title={post.data.title}
-          author={post.data.by}
-          points={post.data.score}
-          comments={post.data.descendants}
-          type={post.data.type}
+          link={post.url}
+          title={post.title}
+          author={post.by}
+          points={post.score}
+          comments={post.descendants}
+          type={post.type}
         />
       ))}
     </Box>
