@@ -18,7 +18,9 @@ function PostsList(props: any) {
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
     axios
-      .get<Number[]>("https://hacker-news.firebaseio.com/v0/topstories.json")
+      .get<Number[]>(
+        `https://hacker-news.firebaseio.com/v0/${props.endpoint}.json`
+      )
       .then((res) =>
         Promise.all(
           res.data
