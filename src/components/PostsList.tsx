@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import axios, { AxiosResponse } from "axios";
+import { useEffect } from "react";
 
 import PostItem from "./PostItem";
 
@@ -15,31 +14,13 @@ interface Post {
 }
 
 function PostsList(props: any) {
-  const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
-    axios
-      .get<Number[]>(
-        `https://hacker-news.firebaseio.com/v0/${props.endpoint}.json`
-      )
-      .then((res) =>
-        Promise.all(
-          res.data
-            .slice(0, 10)
-            .map((id: Number) =>
-              axios.get<Post>(
-                `https://hacker-news.firebaseio.com/v0/item/${id}.json`
-              )
-            )
-        )
-      )
-      .then((data: AxiosResponse[]) => {
-        setPosts(data.map((post) => post.data));
-      });
+    props.loadData(props.posts);
   }, []);
 
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
-      {posts.map((post, i) => (
+      {props.posts.map((post: Post, i: number) => (
         <PostItem
           key={post.id}
           id={post.id}
