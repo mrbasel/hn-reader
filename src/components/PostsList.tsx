@@ -2,20 +2,11 @@ import { Box } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 import PostItem from "./PostItem";
-
-interface Post {
-  id: Number;
-  url: String;
-  title: String;
-  by: String;
-  score: Number;
-  descendants: Number;
-  type: String;
-}
+import { Post } from "../interfaces/Post";
 
 function PostsList(props: any) {
   useEffect(() => {
-    props.loadData(props.posts);
+    if (props.posts.length === 0) props.loadData();
   }, []);
 
   return (
