@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Center, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 import PostItem from "./PostItem";
@@ -8,6 +8,15 @@ function PostsList(props: any) {
   useEffect(() => {
     if (props.posts.length === 0) props.loadData();
   }, []);
+
+  // Show loading spinner if posts havent loaded yet
+  if (props.posts.length === 0) {
+    return (
+      <Center height="90vh">
+        <Spinner size="xl" />
+      </Center>
+    );
+  }
 
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
