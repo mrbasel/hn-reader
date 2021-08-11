@@ -1,4 +1,12 @@
 import { Box, Flex, Heading, HStack, Link, Text } from "@chakra-ui/react";
+import formatDistance from "date-fns/formatDistance";
+
+function findTimePassed(unixTime: number): String {
+  const baseDate = new Date(unixTime * 1000);
+  const currentDate = new Date();
+
+  return formatDistance(currentDate, baseDate).replaceAll("about", "") + " ago";
+}
 
 function PostItem(props: any) {
   return (
@@ -14,11 +22,11 @@ function PostItem(props: any) {
           <Link href={props.link}>{props.title}</Link>
         </Heading>
         <Box>
-          <Text display="inline" mr="2" fontWeight="bold" color="gray">
-            /{props.type}
-          </Text>
           <Text display="inline" color="gray">
             by {props.author}
+          </Text>
+          <Text display="inline" ml="1" color="gray">
+            {findTimePassed(props.unixTime)}
           </Text>
         </Box>
         <HStack spacing="4">
@@ -29,7 +37,6 @@ function PostItem(props: any) {
           >
             {props.comments} comments
           </Link>
-          <Text color="whiteAlpha.700">Share</Text>
         </HStack>
       </Flex>
     </Flex>

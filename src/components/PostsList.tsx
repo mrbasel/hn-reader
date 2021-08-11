@@ -31,6 +31,7 @@ function PostsList(props: any) {
           points={post.score}
           comments={post.descendants}
           type={post.type}
+          unixTime={post.time}
         />
       ))}
     </Box>

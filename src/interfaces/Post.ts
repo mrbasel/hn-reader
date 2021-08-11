@@ -6,4 +6,5 @@ export interface Post {
     score: Number;
     descendants: Number;
     type: String;
+    time: Number;
 }
