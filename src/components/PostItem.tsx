@@ -18,7 +18,7 @@ function PostItem(props: any) {
         ml="6"
         textAlign="left"
       >
-        <Heading as="h3" size="md">
+        <Heading as="h3" size="sm">
           <Link href={props.link}>{props.title}</Link>
         </Heading>
         <Box>
