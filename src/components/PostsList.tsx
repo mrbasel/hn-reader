@@ -32,6 +32,7 @@ function PostsList(props: any) {
           comments={post.descendants}
           type={post.type}
           unixTime={post.time}
+          authorPage={"https://news.ycombinator.com/user?id=" + post.by}
         />
       ))}
     </Box>

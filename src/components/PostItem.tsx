@@ -22,9 +22,10 @@ function PostItem(props: any) {
           <Link href={props.link}>{props.title}</Link>
         </Heading>
         <Box>
-          <Text display="inline" color="gray">
-            by {props.author}
-          </Text>
+          <Text display="inline" color="gray">by </Text>
+          <Link href={props.authorPage} color="gray">
+            {props.author}
+          </Link>
           <Text display="inline" ml="1" color="gray">
             {findTimePassed(props.unixTime)}
           </Text>
