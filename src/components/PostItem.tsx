@@ -22,7 +22,9 @@ function PostItem(props: any) {
           <Link href={props.link}>{props.title}</Link>
         </Heading>
         <Box>
-          <Text display="inline" color="gray">by </Text>
+          <Text display="inline" color="gray">
+            by{" "}
+          </Text>
           <Link href={props.authorPage} color="gray">
             {props.author}
           </Link>
@@ -32,12 +34,7 @@ function PostItem(props: any) {
         </Box>
         <HStack spacing="4">
           <Text color="whiteAlpha.700">{props.points} points</Text>
-          <Link
-            href={`https://news.ycombinator.com/item?id=${props.id}`}
-            color="whiteAlpha.700"
-          >
-            {props.comments} comments
-          </Link>
+          {props.children}
         </HStack>
       </Flex>
     </Flex>

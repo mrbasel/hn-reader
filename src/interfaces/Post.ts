@@ -7,4 +7,5 @@ export interface Post {
     descendants: Number;
     type: String;
     time: Number;
+    kids: number[];
 }
