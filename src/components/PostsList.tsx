@@ -29,7 +29,6 @@ function PostsList(props: any) {
 
   return (
     <Switch>
-      {/* TODO: Fix unvalid url issue */}
       <Route exact path={`${path}/post/:id`} key="post">
         <PostComments
           commentIds={props.posts.map((post: Post) => {

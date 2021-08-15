@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
   Link as RouterLink,
+  Redirect,
 } from "react-router-dom";
 
 import PostsList from "./components/PostsList";
@@ -41,7 +42,7 @@ function App() {
       <Router>
         <Flex as="nav" justifyContent="space-around" alignItems="center">
           <Heading>
-            <Link as={RouterLink} to="/">
+            <Link as={RouterLink} to="/top">
               Hacker News
             </Link>
           </Heading>
@@ -58,7 +59,7 @@ function App() {
           </Box>
         </Flex>
         <Switch>
-          <Route exact path="/" key="/">
+          <Route path="/top" key="/top">
             <PostsList
               posts={posts}
               loadData={() => loadData(setPosts, "topstories")}
@@ -82,6 +83,7 @@ function App() {
               loadData={() => loadData(setJobPosts, "jobstories")}
             />
           </Route>
+          <Redirect to="/top" />
         </Switch>
       </Router>
     </ChakraProvider>
