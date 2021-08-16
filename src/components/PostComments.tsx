@@ -10,12 +10,16 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import { Post } from "../interfaces/Post";
+import { findTimePassed } from "../utils";
 
 interface Comment {
   id: number;
   text: string;
   time: number;
+  by: string;
+  parent: number;
 }
 
 interface ParamTypes {
@@ -90,6 +94,12 @@ function PostComments(props: any) {
 
       {comments.map((comment: Comment) => (
         <Box border="1px solid #333" my="4" p="3" key={comment.id}>
+          <HStack mb="1" color="gray">
+            <Link href={"https://news.ycombinator.com/user?id=" + comment.by}>
+              {comment.by}
+            </Link>
+            <Text>{findTimePassed(comment.time)}</Text>
+          </HStack>
           <Text dangerouslySetInnerHTML={{ __html: comment.text }}>
             {/* {comment.text} */}
           </Text>
