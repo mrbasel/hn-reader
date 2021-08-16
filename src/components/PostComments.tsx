@@ -77,7 +77,7 @@ function PostComments(props: any) {
           </Link>
           <Text>{postData?.descendants} comments</Text>
         </HStack>
-        {postData.text && (
+        {postData?.text && (
           <Text
             mt="3"
             dangerouslySetInnerHTML={{ __html: postData.text }}
