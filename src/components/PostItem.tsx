@@ -1,12 +1,5 @@
 import { Box, Flex, Heading, HStack, Link, Text } from "@chakra-ui/react";
-import formatDistance from "date-fns/formatDistance";
-
-function findTimePassed(unixTime: number): String {
-  const baseDate = new Date(unixTime * 1000);
-  const currentDate = new Date();
-
-  return formatDistance(currentDate, baseDate).replaceAll("about", "") + " ago";
-}
+import { findTimePassed } from "../utils";
 
 function PostItem(props: any) {
   return (
