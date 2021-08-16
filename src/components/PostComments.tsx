@@ -1,7 +1,9 @@
-import { Box, Center, Heading, Text } from "@chakra-ui/react";
+import { Box, Center, Heading, HStack, Link, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Post } from "../interfaces/Post";
+import PostItem from "./PostItem";
 
 interface Comment {
   id: number;
@@ -20,8 +22,14 @@ function PostComments(props: any) {
   ).commentIds;
 
   const [comments, setComments] = useState<Comment[]>([]);
+  const [postData, setPost] = useState<Post>();
   useEffect(() => {
-    if (post)
+    if (post) {
+      axios
+        .get<Post>(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+        .then((res: any) => {
+          setPost(res.data);
+        });
       Promise.all(
         post.map((id: number) =>
           axios.get<Comment>(
@@ -31,6 +39,7 @@ function PostComments(props: any) {
       ).then((data: any[]) => {
         setComments(data.map((res) => res.data));
       });
+    }
   }, []);
 
   if (!post)
@@ -44,6 +53,19 @@ function PostComments(props: any) {
   // TODO: Show comments in lower levels
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
+      <Box border="1px solid #333" my="4" p="3">
+        <Heading size="md">
+          <Link href={postData?.url}>{postData?.title}</Link>
+        </Heading>
+        <HStack mt="1.5" color="grey">
+          <Text>{postData?.score} points</Text>
+          <Link href={"https://news.ycombinator.com/user?id=" + postData?.by}>
+            by {postData?.by}
+          </Link>
+          <Text>{postData?.descendants} comments</Text>
+        </HStack>
+      </Box>
+
       {comments.map((comment: Comment) => (
         <Box border="1px solid #333" my="4" p="3" key={comment.id}>
           <Text dangerouslySetInnerHTML={{ __html: comment.text }}>

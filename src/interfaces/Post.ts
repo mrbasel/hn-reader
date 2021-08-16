@@ -1,11 +1,11 @@
 export interface Post {
     id: Number;
-    url: String;
-    title: String;
-    by: String;
+    url: string;
+    title: string;
+    by: string;
     score: Number;
     descendants: Number;
-    type: String;
+    type: string;
     time: Number;
     kids: number[];
 }
