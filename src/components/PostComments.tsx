@@ -60,6 +60,7 @@ function PostComments(props: any) {
 
   // TODO: render html using a safer way
   // TODO: Show comments in lower levels
+  // TODO: Add comment metadata
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
       <Box border="1px solid #333" my="4" p="3">
@@ -73,6 +74,12 @@ function PostComments(props: any) {
           </Link>
           <Text>{postData?.descendants} comments</Text>
         </HStack>
+        {postData.text && (
+          <Text
+            mt="3"
+            dangerouslySetInnerHTML={{ __html: postData.text }}
+          ></Text>
+        )}
       </Box>
 
       {postData?.descendants === 0 && (
