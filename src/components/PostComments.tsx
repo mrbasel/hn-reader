@@ -1,9 +1,16 @@
-import { Box, Center, Heading, HStack, Link, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Heading,
+  HStack,
+  Link,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Post } from "../interfaces/Post";
-import PostItem from "./PostItem";
 
 interface Comment {
   id: number;
@@ -17,21 +24,21 @@ interface ParamTypes {
 
 function PostComments(props: any) {
   let { id } = useParams<{ id: string }>();
-  const post = props.commentIds.find(
+  const postCommentIds = props.commentIds.find(
     (elem: any) => elem.id === parseInt(id)
   ).commentIds;
-
   const [comments, setComments] = useState<Comment[]>([]);
   const [postData, setPost] = useState<Post>();
+
   useEffect(() => {
-    if (post) {
-      axios
-        .get<Post>(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
-        .then((res: any) => {
-          setPost(res.data);
-        });
+    axios
+      .get<Post>(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+      .then((res: any) => {
+        setPost(res.data);
+      });
+    if (postCommentIds) {
       Promise.all(
-        post.map((id: number) =>
+        postCommentIds.map((id: number) =>
           axios.get<Comment>(
             `https://hacker-news.firebaseio.com/v0/item/${id}.json`
           )
@@ -42,12 +49,14 @@ function PostComments(props: any) {
     }
   }, []);
 
-  if (!post)
+  // Show loading spinner if the post or comments havent loaded yet
+  if (comments.length === 0 || !postData) {
     return (
-      <Center h="80vh">
-        <Heading size="md">No comments yet</Heading>
+      <Center height="90vh">
+        <Spinner size="xl" />
       </Center>
     );
+  }
 
   // TODO: render html using a safer way
   // TODO: Show comments in lower levels
@@ -65,6 +74,12 @@ function PostComments(props: any) {
           <Text>{postData?.descendants} comments</Text>
         </HStack>
       </Box>
+
+      {postData?.descendants === 0 && (
+        <Center h="20vh">
+          <Heading size="md">No comments yet</Heading>
+        </Center>
+      )}
 
       {comments.map((comment: Comment) => (
         <Box border="1px solid #333" my="4" p="3" key={comment.id}>
