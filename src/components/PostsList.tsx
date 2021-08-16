@@ -53,13 +53,15 @@ function PostsList(props: any) {
                 unixTime={post.time}
                 authorPage={"https://news.ycombinator.com/user?id=" + post.by}
               >
-                <Link
-                  as={RouterLink}
-                  to={`${url}/post/${post.id}`}
-                  color="whiteAlpha.700"
-                >
-                  {post.descendants} comments
-                </Link>
+                {post.descendants >= 0 && (
+                  <Link
+                    as={RouterLink}
+                    to={`${url}/post/${post.id}`}
+                    color="whiteAlpha.700"
+                  >
+                    {post.descendants} comments
+                  </Link>
+                )}
               </PostItem>
             </Box>
           ))}
