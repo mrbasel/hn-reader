@@ -11,6 +11,7 @@ import {
 
 import PostsList from "./components/PostsList";
 import { Post } from "./interfaces/Post";
+import theme from "./theme";
 
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -38,7 +39,7 @@ function App() {
   }
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Router>
         <Flex as="nav" justifyContent="space-around" alignItems="center">
           <Heading>
