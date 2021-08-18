@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 
 import PostItem from "./PostItem";
-// import PostComments from "./PostComments";
-import { Post } from "../interfaces/Post";
+import PostComments from "./PostComments";
+import Post from "../interfaces/Post";
 
 function PostsList(props: any) {
   let { path, url } = useRouteMatch();
@@ -30,11 +30,7 @@ function PostsList(props: any) {
   return (
     <Switch>
       <Route exact path={`${path}/post/:id`} key="post">
-        {/* <PostComments
-          commentIds={props.posts.map((post: Post) => {
-            return { id: post.id, commentIds: post.kids };
-          })}
-        /> */}
+        <PostComments />
       </Route>
       <Route path="/" key="root">
         <Box maxW="960px" mx="auto" mt="8" p={4} color="white">

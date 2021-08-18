@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import PostsList from "./components/PostsList";
-import { Post } from "./interfaces/Post";
+import Post from "./interfaces/Post";
 import theme from "./theme";
 
 function App() {

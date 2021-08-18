@@ -1,4 +1,7 @@
-export interface Post {
+import Comment from "./Comment";
+
+
+export default interface Post {
     id: number;
     title: string;
     points: number;
@@ -9,4 +12,5 @@ export interface Post {
     time_ago: number;
     url: string;
     domain: string;
+    comments: Comment[];
 }

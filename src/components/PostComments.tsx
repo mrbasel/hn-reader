@@ -7,20 +7,13 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Post } from "../interfaces/Post";
-import { findTimePassed } from "../utils";
-
-interface Comment {
-  id: number;
-  text: string;
-  time: number;
-  by: string;
-  parent: number;
-}
+import Post from "../interfaces/Post";
+import Comment from "../interfaces/Comment";
+import PostComment from "./PostComment";
 
 interface ParamTypes {
   commentIds: Array<{ id: number; commentIds: number[] }>;
@@ -28,29 +21,16 @@ interface ParamTypes {
 
 function PostComments(props: any) {
   let { id } = useParams<{ id: string }>();
-  const postCommentIds = props.commentIds.find(
-    (elem: any) => elem.id === parseInt(id)
-  ).commentIds;
   const [comments, setComments] = useState<Comment[]>([]);
   const [postData, setPost] = useState<Post>();
 
   useEffect(() => {
     axios
-      .get<Post>(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
-      .then((res: any) => {
+      .get<Comment[]>(`https://node-hnapi.herokuapp.com/item/${id}`)
+      .then((res: AxiosResponse) => {
         setPost(res.data);
+        setComments(res.data.comments);
       });
-    if (postCommentIds) {
-      Promise.all(
-        postCommentIds.map((id: number) =>
-          axios.get<Comment>(
-            `https://hacker-news.firebaseio.com/v0/item/${id}.json`
-          )
-        )
-      ).then((data: any[]) => {
-        setComments(data.map((res) => res.data));
-      });
-    }
   }, []);
 
   // Show loading spinner if the post or comments havent loaded yet
@@ -62,8 +42,6 @@ function PostComments(props: any) {
     );
   }
 
-  // TODO: render html using a safer way
-  // TODO: Show comments in lower levels
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
       <Box border="1px solid #333" my="4" p="3">
@@ -92,17 +70,12 @@ function PostComments(props: any) {
       )}
 
       {comments.map((comment: Comment) => (
-        <Box border="1px solid #333" my="4" p="3" key={comment.id}>
-          <HStack mb="1" color="gray">
-            <Link href={"https://news.ycombinator.com/user?id=" + comment.by}>
-              {comment.by}
-            </Link>
-            <Text>{findTimePassed(comment.time)}</Text>
-          </HStack>
-          <Text dangerouslySetInnerHTML={{ __html: comment.text }}>
-            {/* {comment.text} */}
-          </Text>
-        </Box>
+        <PostComment
+          key={comment.id}
+          comment={comment}
+          responses={comment.comments}
+          isTopLevel={true}
+        />
       ))}
     </Box>
   );
