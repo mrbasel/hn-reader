@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import PostItem from "./PostItem";
-import PostComments from "./PostComments";
+// import PostComments from "./PostComments";
 import { Post } from "../interfaces/Post";
 
 function PostsList(props: any) {
@@ -30,11 +30,11 @@ function PostsList(props: any) {
   return (
     <Switch>
       <Route exact path={`${path}/post/:id`} key="post">
-        <PostComments
+        {/* <PostComments
           commentIds={props.posts.map((post: Post) => {
             return { id: post.id, commentIds: post.kids };
           })}
-        />
+        /> */}
       </Route>
       <Route path="/" key="root">
         <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
@@ -46,20 +46,20 @@ function PostsList(props: any) {
                 index={i + 1}
                 link={post.url}
                 title={post.title}
-                author={post.by}
-                points={post.score}
-                comments={post.descendants}
+                author={post.user}
+                points={post.points}
+                comments={post.comments_count}
                 type={post.type}
-                unixTime={post.time}
-                authorPage={"https://news.ycombinator.com/user?id=" + post.by}
+                unixTime={post.time_ago}
+                authorPage={"https://news.ycombinator.com/user?id=" + post.user}
               >
-                {post.descendants >= 0 && (
+                {post.comments_count >= 0 && (
                   <Link
                     as={RouterLink}
                     to={`${url}/post/${post.id}`}
                     color="whiteAlpha.700"
                   >
-                    {post.descendants} comments
+                    {post.comments_count} comments
                   </Link>
                 )}
               </PostItem>

@@ -71,11 +71,11 @@ function PostComments(props: any) {
           <Link href={postData?.url}>{postData?.title}</Link>
         </Heading>
         <HStack mt="1.5" color="grey">
-          <Text>{postData?.score} points</Text>
-          <Link href={"https://news.ycombinator.com/user?id=" + postData?.by}>
-            by {postData?.by}
+          <Text>{postData?.points} points</Text>
+          <Link href={"https://news.ycombinator.com/user?id=" + postData?.user}>
+            by {postData?.user}
           </Link>
-          <Text>{postData?.descendants} comments</Text>
+          <Text>{postData?.comments_count} comments</Text>
         </HStack>
         {postData?.text && (
           <Text
@@ -85,7 +85,7 @@ function PostComments(props: any) {
         )}
       </Box>
 
-      {postData?.descendants === 0 && (
+      {postData?.comments_count === 0 && (
         <Center h="20vh">
           <Heading size="md">No comments yet</Heading>
         </Center>

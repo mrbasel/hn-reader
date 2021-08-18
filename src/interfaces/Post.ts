@@ -1,12 +1,12 @@
 export interface Post {
-    id: Number;
-    url: string;
+    id: number;
     title: string;
+    points: number;
+    user: string;
     text: string;
-    by: string;
-    score: Number;
-    descendants: Number;
+    comments_count: number;
     type: string;
-    time: Number;
-    kids: number[];
+    time_ago: number;
+    url: string;
+    domain: string;
 }

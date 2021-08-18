@@ -19,22 +19,11 @@ function App() {
   const [showPosts, setShowPosts] = useState<Post[]>([]);
   const [jobPosts, setJobPosts] = useState<Post[]>([]);
 
-  function loadData(setPosts: Function, endpoint: String) {
+  function loadData(setPosts: Function, endpoint: string) {
     axios
-      .get<Number[]>(`https://hacker-news.firebaseio.com/v0/${endpoint}.json`)
-      .then((res) =>
-        Promise.all(
-          res.data
-            .slice(0, 10)
-            .map((id: Number) =>
-              axios.get<Post>(
-                `https://hacker-news.firebaseio.com/v0/item/${id}.json`
-              )
-            )
-        )
-      )
-      .then((data: AxiosResponse[]) => {
-        setPosts(data.map((post) => post.data));
+      .get<Post[]>(`https://node-hnapi.herokuapp.com/${endpoint}`)
+      .then((res: AxiosResponse) => {
+        setPosts(res.data);
       });
   }
 
@@ -63,25 +52,25 @@ function App() {
           <Route path="/top" key="/top">
             <PostsList
               posts={posts}
-              loadData={() => loadData(setPosts, "topstories")}
+              loadData={() => loadData(setPosts, "news")}
             />
           </Route>
           <Route path="/ask" key="/ask">
             <PostsList
               posts={askPosts}
-              loadData={() => loadData(setAskPosts, "askstories")}
+              loadData={() => loadData(setAskPosts, "ask")}
             />
           </Route>
           <Route path="/show" key="/show">
             <PostsList
               posts={showPosts}
-              loadData={() => loadData(setShowPosts, "showstories")}
+              loadData={() => loadData(setShowPosts, "show")}
             />
           </Route>
           <Route path="/jobs" key="/jobs">
             <PostsList
               posts={jobPosts}
-              loadData={() => loadData(setJobPosts, "jobstories")}
+              loadData={() => loadData(setJobPosts, "jobs")}
             />
           </Route>
           <Redirect to="/top" />

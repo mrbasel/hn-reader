@@ -1,5 +1,4 @@
 import { Box, Flex, Heading, HStack, Link, Text } from "@chakra-ui/react";
-import { findTimePassed } from "../utils";
 
 function PostItem(props: any) {
   return (
@@ -22,7 +21,7 @@ function PostItem(props: any) {
             {props.author}
           </Link>
           <Text display="inline" ml="1" color="gray">
-            {findTimePassed(props.unixTime)}
+            {props.unixTime}
           </Text>
         </Box>
         <HStack spacing="4">
