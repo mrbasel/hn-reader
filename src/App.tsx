@@ -43,8 +43,8 @@ function App() {
             <Link as={RouterLink} to="/show" mx="4">
               Show
             </Link>
-            <Link as={RouterLink} to="/jobs" mx="4">
-              Jobs
+            <Link as={RouterLink} to="/newest" mx="4">
+              New
             </Link>
           </Box>
         </Flex>
@@ -67,10 +67,10 @@ function App() {
               loadData={() => loadData(setShowPosts, "show")}
             />
           </Route>
-          <Route path="/jobs" key="/jobs">
+          <Route path="/newest" key="/newest">
             <PostsList
               posts={jobPosts}
-              loadData={() => loadData(setJobPosts, "jobs")}
+              loadData={() => loadData(setJobPosts, "newest")}
             />
           </Route>
           <Redirect to="/top" />
