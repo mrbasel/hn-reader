@@ -55,10 +55,10 @@ function PostComments(props: any) {
           </Link>
           <Text>{postData?.comments_count} comments</Text>
         </HStack>
-        {postData?.text && (
+        {postData?.content && (
           <Text
             mt="3"
-            dangerouslySetInnerHTML={{ __html: postData.text }}
+            dangerouslySetInnerHTML={{ __html: postData.content }}
           ></Text>
         )}
       </Box>

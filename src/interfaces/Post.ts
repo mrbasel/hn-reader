@@ -6,7 +6,7 @@ export default interface Post {
     title: string;
     points: number;
     user: string;
-    text: string;
+    content: string;
     comments_count: number;
     type: string;
     time_ago: number;
