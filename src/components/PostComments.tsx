@@ -44,7 +44,7 @@ function PostComments(props: any) {
 
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
-      <Box border="1px solid #333" my="4" p="3">
+      <Box border="1px solid #333" bgColor="#262626" my="8" p="3">
         <Heading size="md">
           <Link href={postData?.url}>{postData?.title}</Link>
         </Heading>

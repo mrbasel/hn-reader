@@ -11,6 +11,7 @@ function PostComment(props: PostCommentProps) {
   return (
     <Box
       border={props.isTopLevel ? "1px solid #333" : ""}
+      bgColor="#262626"
       my={props.isTopLevel ? "4" : ""}
       p="3"
       key={props.comment.id}

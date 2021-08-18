@@ -2,8 +2,8 @@ import { Box, Flex, Heading, HStack, Link, Text } from "@chakra-ui/react";
 
 function PostItem(props: any) {
   return (
-    <Flex my="4" p="3" border="1px solid #333">
-      <Heading>{props.index}</Heading>
+    <Flex my="4" p="3" border="1px solid #333" bgColor="#262626">
+      <Heading textAlign="right">{props.index}</Heading>
       <Flex
         flexDir="column"
         justifyContent="space-between"
