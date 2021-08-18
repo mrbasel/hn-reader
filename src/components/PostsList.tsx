@@ -11,11 +11,16 @@ import PostItem from "./PostItem";
 import PostComments from "./PostComments";
 import Post from "../interfaces/Post";
 
-function PostsList(props: any) {
+interface PostsListProps {
+  posts: Post[];
+  getPosts: Function;
+}
+
+function PostsList(props: PostsListProps) {
   let { path, url } = useRouteMatch();
 
   useEffect(() => {
-    if (props.posts.length === 0) props.loadData();
+    if (props.posts.length === 0) props.getPosts();
   }, []);
 
   // Show loading spinner if posts havent loaded yet
@@ -29,37 +34,25 @@ function PostsList(props: any) {
 
   return (
     <Switch>
+      {/* Route for comments page */}
       <Route exact path={`${path}/post/:id`} key="post">
         <PostComments />
       </Route>
       <Route path="/" key="root">
         <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
           {props.posts.map((post: Post, i: number) => (
-            <Box>
-              <PostItem
-                key={post.id}
-                id={post.id}
-                index={i + 1}
-                link={post.url}
-                title={post.title}
-                author={post.user}
-                points={post.points}
-                comments={post.comments_count}
-                type={post.type}
-                unixTime={post.time_ago}
-                authorPage={"https://news.ycombinator.com/user?id=" + post.user}
-              >
-                {post.comments_count >= 0 && (
-                  <Link
-                    as={RouterLink}
-                    to={`${url}/post/${post.id}`}
-                    color="whiteAlpha.700"
-                  >
-                    {post.comments_count} comments
-                  </Link>
-                )}
-              </PostItem>
-            </Box>
+            <PostItem key={post.id} index={i} post={post}>
+              {/* Link that points to comments page for given post */}
+              {post.comments_count >= 0 && (
+                <Link
+                  as={RouterLink}
+                  to={`${url}/post/${post.id}`}
+                  color="whiteAlpha.700"
+                >
+                  {post.comments_count} comments
+                </Link>
+              )}
+            </PostItem>
           ))}
         </Box>
       </Route>

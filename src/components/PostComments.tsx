@@ -15,10 +15,6 @@ import Post from "../interfaces/Post";
 import Comment from "../interfaces/Comment";
 import PostComment from "./PostComment";
 
-interface ParamTypes {
-  commentIds: Array<{ id: number; commentIds: number[] }>;
-}
-
 function PostComments(props: any) {
   let { id } = useParams<{ id: string }>();
   const [comments, setComments] = useState<Comment[]>([]);

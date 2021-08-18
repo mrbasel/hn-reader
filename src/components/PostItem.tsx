@@ -1,9 +1,16 @@
 import { Box, Flex, Heading, HStack, Link, Text } from "@chakra-ui/react";
+import Post from "../interfaces/Post";
 
-function PostItem(props: any) {
+interface PostItemProps {
+  post: Post;
+  index: number;
+  children: React.ReactNode;
+}
+
+function PostItem(props: PostItemProps) {
   return (
     <Flex my="4" p="3" border="1px solid #333" bgColor="#262626">
-      <Heading textAlign="right">{props.index}</Heading>
+      <Heading textAlign="right">{props.index + 1}</Heading>
       <Flex
         flexDir="column"
         justifyContent="space-between"
@@ -11,21 +18,24 @@ function PostItem(props: any) {
         textAlign="left"
       >
         <Heading as="h3" size="sm">
-          <Link href={props.link}>{props.title}</Link>
+          <Link href={props.post.url}>{props.post.title}</Link>
         </Heading>
         <Box>
           <Text display="inline" color="gray">
             by{" "}
           </Text>
-          <Link href={props.authorPage} color="gray">
-            {props.author}
+          <Link
+            href={"https://news.ycombinator.com/user?id=" + props.post.user}
+            color="gray"
+          >
+            {props.post.user}
           </Link>
           <Text display="inline" ml="1" color="gray">
-            {props.unixTime}
+            {" " + props.post.time_ago}
           </Text>
         </Box>
         <HStack spacing="4">
-          <Text color="whiteAlpha.700">{props.points} points</Text>
+          <Text color="whiteAlpha.700">{props.post.points} points</Text>
           {props.children}
         </HStack>
       </Flex>

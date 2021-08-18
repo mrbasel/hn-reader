@@ -19,7 +19,7 @@ function App() {
   const [showPosts, setShowPosts] = useState<Post[]>([]);
   const [jobPosts, setJobPosts] = useState<Post[]>([]);
 
-  function loadData(setPosts: Function, endpoint: string) {
+  function getPosts(setPosts: Function, endpoint: string) {
     axios
       .get<Post[]>(`https://node-hnapi.herokuapp.com/${endpoint}`)
       .then((res: AxiosResponse) => {
@@ -52,25 +52,25 @@ function App() {
           <Route path="/top" key="/top">
             <PostsList
               posts={posts}
-              loadData={() => loadData(setPosts, "news")}
+              getPosts={() => getPosts(setPosts, "news")}
             />
           </Route>
           <Route path="/ask" key="/ask">
             <PostsList
               posts={askPosts}
-              loadData={() => loadData(setAskPosts, "ask")}
+              getPosts={() => getPosts(setAskPosts, "ask")}
             />
           </Route>
           <Route path="/show" key="/show">
             <PostsList
               posts={showPosts}
-              loadData={() => loadData(setShowPosts, "show")}
+              getPosts={() => getPosts(setShowPosts, "show")}
             />
           </Route>
           <Route path="/newest" key="/newest">
             <PostsList
               posts={jobPosts}
-              loadData={() => loadData(setJobPosts, "newest")}
+              getPosts={() => getPosts(setJobPosts, "newest")}
             />
           </Route>
           <Redirect to="/top" />
