@@ -1,6 +1,7 @@
 import { Box, Flex, HStack, Link, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import Comment from "../interfaces/Comment";
+import "../styles/comment.css";
 
 interface PostCommentProps {
   comment: Comment;
@@ -13,6 +14,7 @@ function PostComment(props: PostCommentProps) {
 
   return (
     <Box
+      className="comment"
       border={props.isTopLevel ? "1px solid #333" : ""}
       bgColor="#262626"
       my={props.isTopLevel ? "4" : ""}
