@@ -1,4 +1,5 @@
-import { Box, HStack, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Link, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import Comment from "../interfaces/Comment";
 
 interface PostCommentProps {
@@ -8,6 +9,8 @@ interface PostCommentProps {
 }
 
 function PostComment(props: PostCommentProps) {
+  const [hidden, setHidden] = useState(false);
+
   return (
     <Box
       border={props.isTopLevel ? "1px solid #333" : ""}
@@ -16,7 +19,7 @@ function PostComment(props: PostCommentProps) {
       p="3"
       key={props.comment.id}
     >
-      <HStack mb="1" color="gray">
+      <HStack mb="1" color="gray" onClick={() => setHidden(!hidden)}>
         <Link
           href={"https://news.ycombinator.com/user?id=" + props.comment.user}
         >
@@ -24,8 +27,11 @@ function PostComment(props: PostCommentProps) {
         </Link>
         <Text>{props.comment.time_ago}</Text>
       </HStack>
-      <Text dangerouslySetInnerHTML={{ __html: props.comment.content }}></Text>
-      <Box className="replies">
+      <Text
+        dangerouslySetInnerHTML={{ __html: props.comment.content }}
+        display={hidden ? "none" : "block"}
+      ></Text>
+      <Box className="replies" display={hidden ? "none" : "block"}>
         {props.responses?.map((comment: Comment) => (
           <PostComment
             key={comment.id}
