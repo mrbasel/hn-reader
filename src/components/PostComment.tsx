@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Link, Text } from "@chakra-ui/react";
+import { Box, HStack, Link, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import Comment from "../interfaces/Comment";
 import "../styles/comment.css";
