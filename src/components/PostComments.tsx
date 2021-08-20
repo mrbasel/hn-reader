@@ -42,7 +42,15 @@ function PostComments(props: any) {
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
       <Box border="1px solid #333" bgColor="#262626" my="8" p="3">
         <Heading size="md">
-          <Link href={postData?.url}>{postData?.title}</Link>
+          <Link
+            href={
+              postData?.url.includes("http")
+                ? postData?.url
+                : `https://news.ycombinator.com/${postData?.url}`
+            }
+          >
+            {postData?.title}
+          </Link>
           {postData?.domain && (
             <Link
               href={"//" + postData?.domain}

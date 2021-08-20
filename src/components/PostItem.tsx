@@ -18,7 +18,13 @@ function PostItem(props: PostItemProps) {
         textAlign="left"
       >
         <Heading as="h3" size="sm">
-          <Link href={props.post.url}>
+          <Link
+            href={
+              props.post.url.includes("http")
+                ? props.post.url
+                : `https://news.ycombinator.com/${props.post.url}`
+            }
+          >
             {props.post.title}
             {"  "}
           </Link>
