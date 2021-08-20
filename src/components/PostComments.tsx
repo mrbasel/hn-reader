@@ -53,6 +53,7 @@ function PostComments(props: any) {
         </HStack>
         {postData?.content && (
           <Text
+          className="comment"
             mt="3"
             dangerouslySetInnerHTML={{ __html: postData.content }}
           ></Text>

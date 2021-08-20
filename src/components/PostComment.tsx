@@ -14,7 +14,6 @@ function PostComment(props: PostCommentProps) {
 
   return (
     <Box
-      className="comment"
       border={props.isTopLevel ? "1px solid #333" : ""}
       bgColor="#262626"
       my={props.isTopLevel ? "4" : ""}
@@ -30,8 +29,9 @@ function PostComment(props: PostCommentProps) {
         <Text>{props.comment.time_ago}</Text>
       </HStack>
       <Text
-        dangerouslySetInnerHTML={{ __html: props.comment.content }}
+        className="comment"
         display={hidden ? "none" : "block"}
+        dangerouslySetInnerHTML={{ __html: props.comment.content }}
       ></Text>
       <Box className="replies" display={hidden ? "none" : "block"}>
         {props.responses?.map((comment: Comment) => (

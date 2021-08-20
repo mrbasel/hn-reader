@@ -3,3 +3,7 @@
 .comment p {
   margin: 0.8em 0;
 }
+
+.comment a {
+  color: #4fbcff;
+}
