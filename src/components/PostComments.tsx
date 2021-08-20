@@ -43,6 +43,15 @@ function PostComments(props: any) {
       <Box border="1px solid #333" bgColor="#262626" my="8" p="3">
         <Heading size="md">
           <Link href={postData?.url}>{postData?.title}</Link>
+          {postData?.domain && (
+            <Link
+              href={"//" + postData?.domain}
+              display="inline"
+              color="gray.400"
+            >
+              ({postData?.domain})
+            </Link>
+          )}
         </Heading>
         <HStack mt="1.5" color="grey">
           <Text>{postData?.points} points</Text>

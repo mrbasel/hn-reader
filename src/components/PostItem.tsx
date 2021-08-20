@@ -18,7 +18,19 @@ function PostItem(props: PostItemProps) {
         textAlign="left"
       >
         <Heading as="h3" size="sm">
-          <Link href={props.post.url}>{props.post.title}</Link>
+          <Link href={props.post.url}>
+            {props.post.title}
+            {"  "}
+          </Link>
+          {props.post.domain && (
+            <Link
+              href={"//" + props.post.domain}
+              display="inline"
+              color="gray.400"
+            >
+              ({props.post.domain})
+            </Link>
+          )}
         </Heading>
         <Box>
           <Text display="inline" color="gray">
