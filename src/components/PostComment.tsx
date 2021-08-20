@@ -7,6 +7,7 @@ interface PostCommentProps {
   comment: Comment;
   responses?: Comment[];
   isTopLevel?: boolean;
+  orginalAuthor: string | undefined;
 }
 
 function PostComment(props: PostCommentProps) {
@@ -25,6 +26,12 @@ function PostComment(props: PostCommentProps) {
           href={"https://news.ycombinator.com/user?id=" + props.comment.user}
         >
           {props.comment.user}
+          {props.comment.user === props.orginalAuthor && (
+            <Text display="inline" fontWeight="bold" color="blue.400">
+              {" "}
+              OP
+            </Text>
+          )}
         </Link>
         <Text>{props.comment.time_ago}</Text>
       </HStack>
@@ -39,6 +46,7 @@ function PostComment(props: PostCommentProps) {
             key={comment.id}
             comment={comment}
             responses={comment.comments}
+            orginalAuthor={props.orginalAuthor}
           />
         ))}
       </Box>

@@ -53,7 +53,7 @@ function PostComments(props: any) {
         </HStack>
         {postData?.content && (
           <Text
-          className="comment"
+            className="comment"
             mt="3"
             dangerouslySetInnerHTML={{ __html: postData.content }}
           ></Text>
@@ -71,6 +71,7 @@ function PostComments(props: any) {
           key={comment.id}
           comment={comment}
           responses={comment.comments}
+          orginalAuthor={postData?.user}
           isTopLevel={true}
         />
       ))}
