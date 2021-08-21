@@ -17,13 +17,36 @@ function App() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [askPosts, setAskPosts] = useState<Post[]>([]);
   const [showPosts, setShowPosts] = useState<Post[]>([]);
-  const [jobPosts, setJobPosts] = useState<Post[]>([]);
+  const [newPosts, setNewPosts] = useState<Post[]>([]);
 
-  function getPosts(setPosts: Function, endpoint: string) {
+  function getPosts(setPosts: Function, endpoint: string, page: string) {
     axios
-      .get<Post[]>(`https://node-hnapi.herokuapp.com/${endpoint}`)
+      .get<Post[]>(`https://node-hnapi.herokuapp.com/${endpoint}?page=${page}`)
       .then((res: AxiosResponse) => {
-        setPosts(res.data);
+        let targetPosts: Post[] = [];
+        switch (endpoint) {
+          case "news":
+            targetPosts = posts;
+            break;
+
+          case "ask":
+            targetPosts = askPosts;
+            break;
+
+          case "show":
+            targetPosts = showPosts;
+            break;
+
+          case "newest":
+            targetPosts = newPosts;
+            break;
+
+          default:
+            break;
+        }
+        const postsCopy = targetPosts.slice();
+        postsCopy.push(...res.data);
+        setPosts(postsCopy);
       });
   }
 
@@ -35,25 +58,25 @@ function App() {
           <Route path="/top" key="/top">
             <PostsList
               posts={posts}
-              getPosts={() => getPosts(setPosts, "news")}
+              getPosts={(page: string) => getPosts(setPosts, "news", page)}
             />
           </Route>
           <Route path="/ask" key="/ask">
             <PostsList
               posts={askPosts}
-              getPosts={() => getPosts(setAskPosts, "ask")}
+              getPosts={(page: string) => getPosts(setAskPosts, "ask", page)}
             />
           </Route>
           <Route path="/show" key="/show">
             <PostsList
               posts={showPosts}
-              getPosts={() => getPosts(setShowPosts, "show")}
+              getPosts={(page: string) => getPosts(setShowPosts, "show", page)}
             />
           </Route>
           <Route path="/newest" key="/newest">
             <PostsList
-              posts={jobPosts}
-              getPosts={() => getPosts(setJobPosts, "newest")}
+              posts={newPosts}
+              getPosts={(page: string) => getPosts(setNewPosts, "newest", page)}
             />
           </Route>
           <Redirect to="/top" />

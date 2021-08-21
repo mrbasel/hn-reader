@@ -8,6 +8,7 @@ function Header(props: any) {
       justifyContent="space-around"
       alignItems="center"
       pb="3"
+      mt="2"
       borderBottom="1px solid orange"
     >
       <Heading size="lg">

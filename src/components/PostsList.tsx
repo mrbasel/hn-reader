@@ -1,5 +1,5 @@
-import { Box, Center, Link, Spinner } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Box, Button, Center, Link, Spinner } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import {
   Route,
   Switch,
@@ -18,10 +18,16 @@ interface PostsListProps {
 
 function PostsList(props: PostsListProps) {
   let { path, url } = useRouteMatch();
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if (props.posts.length === 0) props.getPosts();
+    if (props.posts.length === 0) props.getPosts(page.toString());
   }, []);
+
+  // Fetch posts each time page changes
+  useEffect(() => {
+    if (page !== 1) props.getPosts(page.toString());
+  }, [page]);
 
   // Show loading spinner if posts havent loaded yet
   if (props.posts.length === 0) {
@@ -54,6 +60,18 @@ function PostsList(props: PostsListProps) {
               )}
             </PostItem>
           ))}
+
+          <Center>
+            <Button
+              display={page > 5 ? "none" : "block"}
+              mt="4"
+              onClick={() => {
+                setPage(page + 1);
+              }}
+            >
+              Load more
+            </Button>
+          </Center>
         </Box>
       </Route>
     </Switch>
