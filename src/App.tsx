@@ -1,11 +1,10 @@
-import { Box, ChakraProvider, Flex, Heading, Link } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link as RouterLink,
   Redirect,
 } from "react-router-dom";
 

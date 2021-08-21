@@ -3,14 +3,17 @@ import Post from "../interfaces/Post";
 
 interface PostItemProps {
   post: Post;
-  index: number;
+  index?: number;
   children: React.ReactNode;
 }
 
 function PostItem(props: PostItemProps) {
   return (
     <Flex my="4" p="3" border="1px solid #333" bgColor="#262626">
-      <Heading textAlign="right">{props.index + 1}</Heading>
+      {props.index !== undefined && (
+        <Heading textAlign="right">{props.index + 1}</Heading>
+      )}
+
       <Flex
         flexDir="column"
         justifyContent="space-between"

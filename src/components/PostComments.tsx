@@ -2,10 +2,8 @@ import {
   Box,
   Center,
   Heading,
-  HStack,
   Link,
   Spinner,
-  Text,
 } from "@chakra-ui/react";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
@@ -14,6 +12,7 @@ import { useParams } from "react-router-dom";
 import Post from "../interfaces/Post";
 import Comment from "../interfaces/Comment";
 import PostComment from "./PostComment";
+import PostItem from "./PostItem";
 
 function PostComments(props: any) {
   let { id } = useParams<{ id: string }>();
@@ -40,42 +39,16 @@ function PostComments(props: any) {
 
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
-      <Box border="1px solid #333" bgColor="#262626" my="8" p="3">
-        <Heading size="md">
+      <PostItem key={postData?.id} post={postData!}>
+        {postData?.comments_count! >= 0 && (
           <Link
-            href={
-              postData?.url.includes("http")
-                ? postData?.url
-                : `https://news.ycombinator.com/${postData?.url}`
-            }
+            href={`https://news.ycombinator.com/item?id=${postData?.id}`}
+            color="whiteAlpha.700"
           >
-            {postData?.title}
+            {postData?.comments_count} comments
           </Link>
-          {postData?.domain && (
-            <Link
-              href={"//" + postData?.domain}
-              display="inline"
-              color="gray.400"
-            >
-              ({postData?.domain})
-            </Link>
-          )}
-        </Heading>
-        <HStack mt="1.5" color="grey">
-          <Text>{postData?.points} points</Text>
-          <Link href={"https://news.ycombinator.com/user?id=" + postData?.user}>
-            by {postData?.user}
-          </Link>
-          <Text>{postData?.comments_count} comments</Text>
-        </HStack>
-        {postData?.content && (
-          <Text
-            className="comment"
-            mt="3"
-            dangerouslySetInnerHTML={{ __html: postData.content }}
-          ></Text>
         )}
-      </Box>
+      </PostItem>
 
       {postData?.comments_count === 0 && (
         <Center h="20vh">
