@@ -11,15 +11,12 @@ function PostItem(props: PostItemProps) {
   return (
     <Flex my="4" p="3" border="1px solid #333" bgColor="#262626">
       {props.index !== undefined && (
-        <Heading textAlign="right">{props.index + 1}</Heading>
+        <Heading textAlign="right" mr="6">
+          {props.index + 1}
+        </Heading>
       )}
 
-      <Flex
-        flexDir="column"
-        justifyContent="space-between"
-        ml="6"
-        textAlign="left"
-      >
+      <Flex flexDir="column" justifyContent="space-between" textAlign="left">
         <Heading as="h3" size="sm">
           <Link
             href={
@@ -59,6 +56,13 @@ function PostItem(props: PostItemProps) {
           <Text color="whiteAlpha.700">{props.post.points} points</Text>
           {props.children}
         </HStack>
+        {props.post.content && (
+          <Text
+            className="comment"
+            mt="3"
+            dangerouslySetInnerHTML={{ __html: props.post.content }}
+          ></Text>
+        )}
       </Flex>
     </Flex>
   );
