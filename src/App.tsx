@@ -85,7 +85,6 @@ function App() {
           <Redirect to="/top" />
         </Switch>
       </Router>
-      <Footer></Footer>
     </ChakraProvider>
   );
 }
