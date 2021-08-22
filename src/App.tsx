@@ -12,6 +12,7 @@ import PostsList from "./components/PostsList";
 import Post from "./interfaces/Post";
 import theme from "./theme";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -82,6 +83,7 @@ function App() {
           <Redirect to="/top" />
         </Switch>
       </Router>
+      <Footer></Footer>
     </ChakraProvider>
   );
 }
