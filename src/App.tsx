@@ -13,6 +13,7 @@ import Post from "./interfaces/Post";
 import theme from "./theme";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -54,6 +55,7 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Router>
+        <ScrollToTop />
         <Header />
         <Switch>
           <Route path="/top" key="/top">
