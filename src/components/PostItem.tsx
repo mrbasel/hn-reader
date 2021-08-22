@@ -12,6 +12,8 @@ function PostItem(props: PostItemProps) {
     <Flex my="4" p="3" border="1px solid #333" bgColor="#262626">
       {props.index !== undefined && (
         <Heading textAlign="right" mr="6">
+          {/* Render empty space if index less than nine */}
+          {props.index < 9 && <span>&nbsp;&nbsp;</span>}
           {props.index + 1}
         </Heading>
       )}
