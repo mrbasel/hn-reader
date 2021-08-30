@@ -1,13 +1,16 @@
 import { Box, Flex, Heading, HStack, Link, Text } from "@chakra-ui/react";
+import { Link as RouterLink, useLocation } from "react-router-dom";
+
 import Post from "../interfaces/Post";
 
 interface PostItemProps {
   post: Post;
   index?: number;
-  children: React.ReactNode;
 }
 
 function PostItem(props: PostItemProps) {
+  const { pathname } = useLocation();
+
   return (
     <Flex my="4" p="3" border="1px solid #333" bgColor="#262626">
       {props.index !== undefined && (
@@ -56,7 +59,23 @@ function PostItem(props: PostItemProps) {
         </Box>
         <HStack spacing="4">
           <Text color="whiteAlpha.700">{props.post.points} points</Text>
-          {props.children}
+
+          {/* Render a Router link if in a comments page, else render a normal link */}
+          {pathname.includes("post") ? (
+            <Link
+              href={`https://news.ycombinator.com/item?id=${props.post.id}`}
+            >
+              {props.post.comments_count} comments
+            </Link>
+          ) : (
+            <Link
+              as={RouterLink}
+              to={`/post/${props.post.id}`}
+              color="whiteAlpha.700"
+            >
+              {props.post.comments_count} comments
+            </Link>
+          )}
         </HStack>
         {props.post.content && (
           <Text

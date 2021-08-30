@@ -1,10 +1,4 @@
-import {
-  Box,
-  Center,
-  Heading,
-  Link,
-  Spinner,
-} from "@chakra-ui/react";
+import { Box, Center, Heading, Link, Spinner } from "@chakra-ui/react";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -39,16 +33,7 @@ function PostComments(props: any) {
 
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
-      <PostItem key={postData?.id} post={postData!}>
-        {postData?.comments_count! >= 0 && (
-          <Link
-            href={`https://news.ycombinator.com/item?id=${postData?.id}`}
-            color="whiteAlpha.700"
-          >
-            {postData?.comments_count} comments
-          </Link>
-        )}
-      </PostItem>
+      <PostItem key={postData?.id} post={postData!} />
 
       {postData?.comments_count === 0 && (
         <Center h="20vh">

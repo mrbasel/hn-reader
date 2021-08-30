@@ -1,23 +1,16 @@
 import { Box, Button, Center, Link, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import {
-  Route,
-  Switch,
-  Link as RouterLink,
-  useRouteMatch,
-} from "react-router-dom";
+import { Route, Link as RouterLink } from "react-router-dom";
 
 import PostItem from "./PostItem";
-import PostComments from "./PostComments";
 import Post from "../interfaces/Post";
 
 interface PostsListProps {
   posts: Post[];
-  getPosts: Function;
+  getPosts: (page: string) => void;
 }
 
 function PostsList(props: PostsListProps) {
-  let { path, url } = useRouteMatch();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -39,42 +32,25 @@ function PostsList(props: PostsListProps) {
   }
 
   return (
-    <Switch>
-      {/* Route for comments page */}
-      <Route exact path={`${path}/post/:id`} key="post">
-        <PostComments />
-      </Route>
-      <Route path="/" key="root">
-        <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
-          {props.posts.map((post: Post, i: number) => (
-            <PostItem key={post.id} index={i} post={post}>
-              {/* Link that points to comments page for given post */}
-              {post.comments_count >= 0 && (
-                <Link
-                  as={RouterLink}
-                  to={`${url}/post/${post.id}`}
-                  color="whiteAlpha.700"
-                >
-                  {post.comments_count} comments
-                </Link>
-              )}
-            </PostItem>
-          ))}
+    <Route path="/" key="root">
+      <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
+        {props.posts.map((post: Post, i: number) => (
+          <PostItem key={post.id} index={i} post={post} />
+        ))}
 
-          <Center>
-            <Button
-              display={page > 5 ? "none" : "block"}
-              mt="4"
-              onClick={() => {
-                setPage(page + 1);
-              }}
-            >
-              Load more
-            </Button>
-          </Center>
-        </Box>
-      </Route>
-    </Switch>
+        <Center>
+          <Button
+            display={page > 5 ? "none" : "block"}
+            mt="4"
+            onClick={() => {
+              setPage(page + 1);
+            }}
+          >
+            Load more
+          </Button>
+        </Center>
+      </Box>
+    </Route>
   );
 }
 
