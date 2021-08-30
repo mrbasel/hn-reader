@@ -1,7 +1,15 @@
-import { Flex, Heading, Box, Link } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Box,
+  Link,
+  Image,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
 function Header() {
+  const [isSmallerThan500] = useMediaQuery("(max-width: 500px)");
   return (
     <Flex
       as="nav"
@@ -11,9 +19,9 @@ function Header() {
       mt="2"
       borderBottom="1px solid orange"
     >
-      <Heading size="lg">
+      <Heading>
         <Link as={RouterLink} to="/top">
-          Hacker News
+          {isSmallerThan500 ? "HN" : "Hacker News"}
         </Link>
       </Heading>
       <Box>
