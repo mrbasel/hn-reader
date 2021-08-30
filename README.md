@@ -28,3 +28,7 @@ A reader app for [Hacker News](https://news.ycombinator.com/) with a simple and 
 ![demo image 1](/sh1.png)
 
 ![demo image 2](/sh2.png)
+
+## LICENSE
+
+[MIT](https://github.com/mrbasel/hn-reader/blob/main/LICENSE)
