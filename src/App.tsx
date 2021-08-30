@@ -21,7 +21,11 @@ function App() {
   const [showPosts, setShowPosts] = useState<Post[]>([]);
   const [newPosts, setNewPosts] = useState<Post[]>([]);
 
-  function getPosts(setPosts: Function, endpoint: string, page: string) {
+  function getPosts(
+    setPosts: (posts: Post[]) => void,
+    endpoint: string,
+    page: string
+  ) {
     axios
       .get<Post[]>(`https://node-hnapi.herokuapp.com/${endpoint}?page=${page}`)
       .then((res: AxiosResponse) => {
