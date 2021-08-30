@@ -16,9 +16,12 @@ function PostComment(props: PostCommentProps) {
   return (
     <Box
       border={props.isTopLevel ? "1px solid #333" : ""}
+      borderLeft={props.isTopLevel ? "" : "2px solid #333"}
       bgColor="#262626"
       my={props.isTopLevel ? "4" : ""}
-      p="3"
+      py="3"
+      pl="4"
+      pr="0.5"
       key={props.comment.id}
     >
       <HStack mb="1" color="gray" onClick={() => setHidden(!hidden)}>
