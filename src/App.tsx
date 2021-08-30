@@ -14,6 +14,7 @@ import theme from "./theme";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import About from "./components/About";
 
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -85,6 +86,9 @@ function App() {
               posts={newPosts}
               getPosts={(page: string) => getPosts(setNewPosts, "newest", page)}
             />
+          </Route>
+          <Route path="/about" key="/about">
+            <About />
           </Route>
           <Redirect to="/top" />
         </Switch>

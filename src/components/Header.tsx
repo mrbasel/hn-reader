@@ -26,6 +26,9 @@ function Header(props: any) {
         <Link as={RouterLink} to="/newest" mx="4">
           New
         </Link>
+        <Link as={RouterLink} to="/about" mx="4">
+          About
+        </Link>
       </Box>
     </Flex>
   );
