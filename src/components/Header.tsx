@@ -1,7 +1,7 @@
 import { Flex, Heading, Box, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
-function Header(props: any) {
+function Header() {
   return (
     <Flex
       as="nav"
