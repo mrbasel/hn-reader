@@ -41,6 +41,7 @@ function PostComment(props: PostCommentProps) {
       <Text
         className="comment"
         display={hidden ? "none" : "block"}
+        overflowX="auto"
         dangerouslySetInnerHTML={{ __html: props.comment.content }}
       ></Text>
       <Box className="replies" display={hidden ? "none" : "block"}>
