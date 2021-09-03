@@ -63,6 +63,7 @@ function PostItem(props: PostItemProps) {
           {/* Render a Router link if in a comments page, else render a normal link */}
           {pathname.includes("post") ? (
             <Link
+              color="whiteAlpha.700"
               href={`https://news.ycombinator.com/item?id=${props.post.id}`}
             >
               {props.post.comments_count} comments
