@@ -1,4 +1,4 @@
-import { Box, Center, Heading, Link, Spinner } from "@chakra-ui/react";
+import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

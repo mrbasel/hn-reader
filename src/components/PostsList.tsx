@@ -1,6 +1,6 @@
-import { Box, Button, Center, Link, Spinner } from "@chakra-ui/react";
+import { Box, Button, Center, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Route, Link as RouterLink } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import PostItem from "./PostItem";
 import Post from "../interfaces/Post";
