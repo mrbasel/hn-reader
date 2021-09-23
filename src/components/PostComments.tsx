@@ -8,7 +8,7 @@ import Comment from "../interfaces/Comment";
 import PostComment from "./PostComment";
 import PostItem from "./PostItem";
 
-function PostComments(props: any) {
+function PostComments() {
   let { id } = useParams<{ id: string }>();
   const [comments, setComments] = useState<Comment[]>([]);
   const [postData, setPost] = useState<Post>();
