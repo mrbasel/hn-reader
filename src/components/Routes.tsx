@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Post from "../interfaces/Post";
@@ -12,39 +12,40 @@ function Routes() {
   const [showPosts, setShowPosts] = useState<Post[]>([]);
   const [newPosts, setNewPosts] = useState<Post[]>([]);
 
-  function getPosts(
+  async function getPosts(
     setPosts: (posts: Post[]) => void,
     endpoint: string,
     page: string
   ) {
-    axios
-      .get<Post[]>(`https://node-hnapi.herokuapp.com/${endpoint}?page=${page}`)
-      .then((res: AxiosResponse) => {
-        let targetPosts: Post[] = [];
-        switch (endpoint) {
-          case "news":
-            targetPosts = topPosts;
-            break;
+    const res = await axios.get<Post[]>(
+      `https://node-hnapi.herokuapp.com/${endpoint}?page=${page}`
+    );
+    const posts = res.data;
 
-          case "ask":
-            targetPosts = askPosts;
-            break;
+    let targetPosts: Post[] = [];
+    switch (endpoint) {
+      case "news":
+        targetPosts = topPosts;
+        break;
 
-          case "show":
-            targetPosts = showPosts;
-            break;
+      case "ask":
+        targetPosts = askPosts;
+        break;
 
-          case "newest":
-            targetPosts = newPosts;
-            break;
+      case "show":
+        targetPosts = showPosts;
+        break;
 
-          default:
-            break;
-        }
-        const postsCopy = targetPosts.slice();
-        postsCopy.push(...res.data);
-        setPosts(postsCopy);
-      });
+      case "newest":
+        targetPosts = newPosts;
+        break;
+
+      default:
+        break;
+    }
+    const postsCopy = targetPosts.slice();
+    postsCopy.push(...posts);
+    setPosts(postsCopy);
   }
 
   return (

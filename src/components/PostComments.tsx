@@ -14,12 +14,15 @@ function PostComments() {
   const [postData, setPost] = useState<Post>();
 
   useEffect(() => {
-    axios
-      .get<Comment[]>(`https://node-hnapi.herokuapp.com/item/${id}`)
-      .then((res: AxiosResponse) => {
-        setPost(res.data);
-        setComments(res.data.comments);
-      });
+    const fetchData = async () => {
+      const res = await axios.get(
+        `https://node-hnapi.herokuapp.com/item/${id}`
+      );
+      setPost(res.data);
+      setComments(res.data.comments);
+    };
+
+    fetchData();
   }, []);
 
   // Show loading spinner if the post or comments havent loaded yet
