@@ -44,9 +44,12 @@ function PostItem(props: PostItemProps) {
           )}
         </Heading>
         <Box>
-          <Text display="inline" color="gray">
-            by{" "}
-          </Text>
+          {props.post.user && (
+            <Text display="inline" color="gray">
+              by{" "}
+            </Text>
+          )}
+
           <Link
             href={"https://news.ycombinator.com/user?id=" + props.post.user}
             color="gray"
@@ -58,9 +61,11 @@ function PostItem(props: PostItemProps) {
           </Text>
         </Box>
         <HStack spacing="4">
-          <Text color="whiteAlpha.700">{props.post.points} points</Text>
+          {props.post.points && (
+            <Text color="whiteAlpha.700">{props.post.points} points</Text>
+          )}
 
-          {/* Render a Router link if in a comments page, else render a normal link */}
+          {/* Render a Router link if in a /post page, else render a normal link */}
           {pathname.includes("post") ? (
             <Link
               color="whiteAlpha.700"
@@ -68,7 +73,7 @@ function PostItem(props: PostItemProps) {
             >
               {props.post.comments_count} comments
             </Link>
-          ) : (
+          ) : props.post.user ? (
             <Link
               as={RouterLink}
               to={`/post/${props.post.id}`}
@@ -76,6 +81,8 @@ function PostItem(props: PostItemProps) {
             >
               {props.post.comments_count} comments
             </Link>
+          ) : (
+            ""
           )}
         </HStack>
         {props.post.content && (
