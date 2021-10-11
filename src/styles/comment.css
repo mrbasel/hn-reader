@@ -7,3 +7,7 @@
 .comment a {
   color: #4fbcff;
 }
+
+.comment a:visited {
+  color: #800080;
+}

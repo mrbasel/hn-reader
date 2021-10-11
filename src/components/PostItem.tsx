@@ -24,6 +24,7 @@ function PostItem(props: PostItemProps) {
       <Flex flexDir="column" justifyContent="space-between" textAlign="left">
         <Heading as="h3" size="sm">
           <Link
+            _visited={{ color: "dimgrey" }}
             href={
               props.post.url.includes("http")
                 ? props.post.url
