@@ -23,17 +23,28 @@ function PostItem(props: PostItemProps) {
 
       <Flex flexDir="column" justifyContent="space-between" textAlign="left">
         <Heading as="h3" size="sm">
-          <Link
-            _visited={{ color: "dimgrey" }}
-            href={
-              props.post.url.includes("http")
-                ? props.post.url
-                : `https://news.ycombinator.com/${props.post.url}`
-            }
-          >
-            {props.post.title}
-            {"  "}
-          </Link>
+          {props.post.url.includes("http") ? (
+            <Link
+              _visited={{ color: "dimgrey" }}
+              href={
+                props.post.url.includes("http")
+                  ? props.post.url
+                  : `https://news.ycombinator.com/${props.post.url}`
+              }
+            >
+              {props.post.title}
+              {"  "}
+            </Link>
+          ) : (
+            <Link
+              as={RouterLink}
+              to={`/post/${props.post.id}`}
+              _visited={{ color: "dimgrey" }}
+            >
+              {props.post.title}
+            </Link>
+          )}
+
           {props.post.domain && (
             <Link
               href={"//" + props.post.domain}
