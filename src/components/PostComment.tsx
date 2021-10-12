@@ -29,6 +29,8 @@ function PostComment(props: PostCommentProps) {
           href={"https://news.ycombinator.com/user?id=" + props.comment.user}
         >
           {props.comment.user}
+
+          {/* Show "OP" next to username if author of the post */}
           {props.comment.user === props.orginalAuthor && (
             <Text display="inline" fontWeight="bold" color="blue.400">
               {" "}

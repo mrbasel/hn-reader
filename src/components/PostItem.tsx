@@ -77,7 +77,7 @@ function PostItem(props: PostItemProps) {
             <Text color="whiteAlpha.700">{props.post.points} points</Text>
           )}
 
-          {/* Render a Router link if in a /post page, else render a normal link */}
+          {/* Render a Router link only if not in post page, else normal link which points to https://news.ycombinator.com/item?id={id} */}
           {pathname.includes("post") ? (
             <Link
               color="whiteAlpha.700"
