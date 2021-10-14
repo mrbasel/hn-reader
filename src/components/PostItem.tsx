@@ -1,5 +1,6 @@
-import { Box, Flex, Heading, HStack, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack, Link, Text, Icon } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import { FiExternalLink } from "react-icons/fi";
 
 import Post from "../interfaces/Post";
 
@@ -79,12 +80,15 @@ function PostItem(props: PostItemProps) {
 
           {/* Render a Router link only if not in post page, else normal link which points to https://news.ycombinator.com/item?id={id} */}
           {pathname.includes("post") ? (
-            <Link
-              color="whiteAlpha.700"
-              href={`https://news.ycombinator.com/item?id=${props.post.id}`}
-            >
-              {props.post.comments_count} comments
-            </Link>
+            <Flex flexDir="row" justify="center" align="center">
+              <Link
+                color="whiteAlpha.700"
+                href={`https://news.ycombinator.com/item?id=${props.post.id}`}
+              >
+                {props.post.comments_count} comments<span>&nbsp;</span>
+              </Link>
+              <Icon as={FiExternalLink} color="rgba(255, 255, 255, 0.64)" />
+            </Flex>
           ) : props.post.user ? (
             <Link
               as={RouterLink}
