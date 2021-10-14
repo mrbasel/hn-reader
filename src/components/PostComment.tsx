@@ -1,6 +1,7 @@
-import { Box, HStack, Link, Text } from "@chakra-ui/react";
+import { Box, HStack, Link, Text, Icon } from "@chakra-ui/react";
 import { useState } from "react";
 import Comment from "../interfaces/Comment";
+import { BsChevronBarContract, BsChevronBarExpand } from "react-icons/bs";
 import "../styles/comment.css";
 
 interface PostCommentProps {
@@ -20,25 +21,39 @@ function PostComment(props: PostCommentProps) {
       bgColor="#262626"
       my={props.isTopLevel ? "4" : ""}
       py="3"
-      pl="4"
-      pr="0.5"
+      px="4"
       key={props.comment.id}
     >
-      <HStack mb="1" color="gray" onClick={() => setHidden(!hidden)}>
-        <Link
-          href={"https://news.ycombinator.com/user?id=" + props.comment.user}
-        >
-          {props.comment.user}
+      <HStack
+        mb="1"
+        mr="3"
+        color="gray"
+        onClick={() => setHidden(!hidden)}
+        justify="space-between"
+      >
+        <HStack>
+          <Link
+            href={"https://news.ycombinator.com/user?id=" + props.comment.user}
+          >
+            {props.comment.user}
 
-          {/* Show "OP" next to username if author of the post */}
-          {props.comment.user === props.orginalAuthor && (
-            <Text display="inline" fontWeight="bold" color="blue.400">
-              {" "}
-              OP
-            </Text>
-          )}
-        </Link>
-        <Text>{props.comment.time_ago}</Text>
+            {/* Show "OP" next to username if author of the post */}
+            {props.comment.user === props.orginalAuthor && (
+              <Text display="inline" fontWeight="bold" color="blue.400">
+                {" "}
+                OP
+              </Text>
+            )}
+          </Link>
+          <Text>{props.comment.time_ago}</Text>
+        </HStack>
+        
+        {/* Hide/collapse icons */}
+        {hidden ? (
+          <Icon as={BsChevronBarExpand} _hover={{ color: "#fff" }} cursor="pointer" />
+        ) : (
+          <Icon as={BsChevronBarContract} _hover={{ color: "#fff" }} cursor="pointer"/>
+        )}
       </HStack>
       <Text
         className="comment"
