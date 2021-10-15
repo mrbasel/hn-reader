@@ -21,7 +21,8 @@ function PostComment(props: PostCommentProps) {
       bgColor="#262626"
       my={props.isTopLevel ? "4" : ""}
       py="3"
-      px="4"
+      pl="3"
+      pr={props.isTopLevel ? "2" : ""}
       key={props.comment.id}
     >
       <HStack
