@@ -11,6 +11,7 @@ function Routes() {
   const [askPosts, setAskPosts] = useState<Post[]>([]);
   const [showPosts, setShowPosts] = useState<Post[]>([]);
   const [newPosts, setNewPosts] = useState<Post[]>([]);
+  const [jobPosts, setJobPosts] = useState<Post[]>([]);
 
   async function getPosts(
     setPosts: (posts: Post[]) => void,
@@ -38,6 +39,10 @@ function Routes() {
 
       case "newest":
         targetPosts = newPosts;
+        break;
+
+      case "jobPosts":
+        targetPosts = jobPosts;
         break;
 
       default:
@@ -77,6 +82,12 @@ function Routes() {
           posts={newPosts}
           getPosts={(page: string) => getPosts(setNewPosts, "newest", page)}
           postsType="newest"
+        />
+      </Route>
+      <Route path="/jobs" key="jobs">
+        <PostsList
+          posts={jobPosts}
+          getPosts={(page: string) => getPosts(setJobPosts, "jobs", page)}
         />
       </Route>
       <Route path="/about" key="about">
