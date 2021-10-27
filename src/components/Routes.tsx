@@ -88,6 +88,7 @@ function Routes() {
         <PostsList
           posts={jobPosts}
           getPosts={(page: string) => getPosts(setJobPosts, "jobs", page)}
+          postsType="jobs"
         />
       </Route>
       <Route path="/about" key="about">
