@@ -4,10 +4,12 @@ import { Route } from "react-router-dom";
 
 import PostItem from "./PostItem";
 import Post from "../interfaces/Post";
+import { capitalizeFirstLetter } from "../utils";
 
 interface PostsListProps {
   posts: Post[];
   getPosts: (page: string) => void;
+  postsType: "top" | "ask" | "show" | "newest" | "jobs";
 }
 
 function PostsList(props: PostsListProps) {
@@ -15,6 +17,11 @@ function PostsList(props: PostsListProps) {
 
   useEffect(() => {
     if (props.posts.length === 0) props.getPosts(page.toString());
+  }, []);
+
+  useEffect(() => {
+    if (props.postsType === "top") document.title = "HN App";
+    else document.title = `${capitalizeFirstLetter(props.postsType)} - HN`;
   }, []);
 
   // Fetch posts each time page changes

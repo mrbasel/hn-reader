@@ -1,5 +1,5 @@
 import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -23,7 +23,7 @@ function PostComments() {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   // Show loading spinner if the post or comments havent loaded yet
   if (comments.length === 0 && !postData) {

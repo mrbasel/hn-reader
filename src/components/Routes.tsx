@@ -54,24 +54,29 @@ function Routes() {
         <PostsList
           posts={topPosts}
           getPosts={(page: string) => getPosts(setTopPosts, "news", page)}
+          postsType="top"
+          
         />
       </Route>
       <Route path="/ask" key="ask">
         <PostsList
           posts={askPosts}
           getPosts={(page: string) => getPosts(setAskPosts, "ask", page)}
+          postsType="ask"
         />
       </Route>
       <Route path="/show" key="show">
         <PostsList
           posts={showPosts}
           getPosts={(page: string) => getPosts(setShowPosts, "show", page)}
+          postsType="show"
         />
       </Route>
       <Route path="/newest" key="newest">
         <PostsList
           posts={newPosts}
           getPosts={(page: string) => getPosts(setNewPosts, "newest", page)}
+          postsType="newest"
         />
       </Route>
       <Route path="/about" key="about">

@@ -3,6 +3,7 @@ import { Link as RouterLink, useLocation } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
 
 import Post from "../interfaces/Post";
+import { useEffect } from "react";
 
 interface PostItemProps {
   post: Post;
@@ -11,6 +12,10 @@ interface PostItemProps {
 
 function PostItem(props: PostItemProps) {
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname.includes("post")) document.title = `${props.post.title} - HN`;
+  }, []);
 
   return (
     <Flex my="4" p="3" border="1px solid #333" bgColor="#262626">
