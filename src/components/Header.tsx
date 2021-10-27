@@ -83,9 +83,9 @@ function Header() {
             </Link>
           )}
 
-          <Link as={RouterLink} to="/settings" mx="4">
+          {/* <Link as={RouterLink} to="/settings" mx="4">
             <Button>Settings</Button>
-          </Link>
+          </Link> */}
         </Box>
       </Flex>
     </Box>
