@@ -7,7 +7,7 @@ function About() {
   }, []);
 
   return (
-    <Box my="8" p="4" textAlign="left">
+    <Box my="8" p="4" textAlign="left" mx="auto" maxW="600px">
       <Heading>About</Heading>
       <Box mt="4">
         <Text>
