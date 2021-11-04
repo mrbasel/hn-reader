@@ -47,10 +47,6 @@ function Header() {
                 <MenuItem onClick={() => history.push("/show")}>Show</MenuItem>
                 <MenuItem onClick={() => history.push("/newest")}>New</MenuItem>
                 <MenuItem onClick={() => history.push("/jobs")}>Jobs</MenuItem>
-                <MenuDivider />
-                <MenuItem onClick={() => history.push("/about")}>
-                  About
-                </MenuItem>
               </MenuList>
             </Menu>
           ) : (
@@ -77,11 +73,9 @@ function Header() {
           </Link>
         </Heading>
         <Box position="absolute" right="3">
-          {!isSmallerThan800 && (
-            <Link as={RouterLink} to="/about" mx="4">
-              About
-            </Link>
-          )}
+          <Link as={RouterLink} to="/about" mx="4">
+            About
+          </Link>
 
           {/* <Link as={RouterLink} to="/settings" mx="4">
             <Button>Settings</Button>
