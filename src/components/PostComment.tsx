@@ -25,13 +25,7 @@ function PostComment(props: PostCommentProps) {
       pr={props.isTopLevel ? "2" : ""}
       key={props.comment.id}
     >
-      <HStack
-        mb="1"
-        mr="3"
-        color="gray"
-        onClick={() => setHidden(!hidden)}
-        justify="space-between"
-      >
+      <HStack mb="1" mr="3" color="gray" justify="space-between">
         <HStack>
           <Link
             href={"https://news.ycombinator.com/user?id=" + props.comment.user}
@@ -48,12 +42,22 @@ function PostComment(props: PostCommentProps) {
           </Link>
           <Text>{props.comment.time_ago}</Text>
         </HStack>
-        
+
         {/* Hide/collapse icons */}
         {hidden ? (
-          <Icon as={BsChevronBarExpand} _hover={{ color: "#fff" }} cursor="pointer" />
+          <Icon
+            as={BsChevronBarExpand}
+            _hover={{ color: "#fff" }}
+            cursor="pointer"
+            onClick={() => setHidden(!hidden)}
+          />
         ) : (
-          <Icon as={BsChevronBarContract} _hover={{ color: "#fff" }} cursor="pointer"/>
+          <Icon
+            as={BsChevronBarContract}
+            _hover={{ color: "#fff" }}
+            cursor="pointer"
+            onClick={() => setHidden(!hidden)}
+          />
         )}
       </HStack>
       <Text
