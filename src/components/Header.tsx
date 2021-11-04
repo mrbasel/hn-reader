@@ -5,22 +5,21 @@ import {
   Link,
   useMediaQuery,
   Icon,
-  Button,
   IconButton,
 } from "@chakra-ui/react";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
 import {
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
 } from "@chakra-ui/react";
 
 function Header() {
   const [isSmallerThan800] = useMediaQuery("(max-width: 800px)");
   const history = useHistory();
+  const { pathname } = useLocation();
   return (
     <Box as="nav" borderBottom="1px solid orange">
       <Flex
@@ -41,12 +40,37 @@ function Header() {
                 icon={<Icon as={HiMenu} />}
                 variant="outline"
               />
-              <MenuList>
-                <MenuItem onClick={() => history.push("/top")}>Top</MenuItem>
-                <MenuItem onClick={() => history.push("/ask")}>Ask</MenuItem>
-                <MenuItem onClick={() => history.push("/show")}>Show</MenuItem>
-                <MenuItem onClick={() => history.push("/newest")}>New</MenuItem>
-                <MenuItem onClick={() => history.push("/jobs")}>Jobs</MenuItem>
+              <MenuList backgroundColor="#262626">
+                <MenuItem
+                  color={pathname.includes("top") ? "orange" : ""}
+                  onClick={() => history.push("/top")}
+                >
+                  Top
+                </MenuItem>
+                <MenuItem
+                  color={pathname.includes("ask") ? "orange" : ""}
+                  onClick={() => history.push("/ask")}
+                >
+                  Ask
+                </MenuItem>
+                <MenuItem
+                  color={pathname.includes("show") ? "orange" : ""}
+                  onClick={() => history.push("/show")}
+                >
+                  Show
+                </MenuItem>
+                <MenuItem
+                  color={pathname.includes("newest") ? "orange" : ""}
+                  onClick={() => history.push("/newest")}
+                >
+                  New
+                </MenuItem>
+                <MenuItem
+                  color={pathname.includes("jobs") ? "orange" : ""}
+                  onClick={() => history.push("/jobs")}
+                >
+                  Jobs
+                </MenuItem>
               </MenuList>
             </Menu>
           ) : (
