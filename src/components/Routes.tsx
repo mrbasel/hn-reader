@@ -5,6 +5,7 @@ import Post from "../interfaces/Post";
 import About from "./About";
 import PostComments from "./PostComments";
 import PostsList from "./PostsList";
+import SavedPosts from "./SavedPosts";
 
 function Routes() {
   const [topPosts, setTopPosts] = useState<Post[]>([]);
@@ -55,12 +56,11 @@ function Routes() {
 
   return (
     <Switch>
-      <Route path="/top" key="top">
+      <Route path="/top">
         <PostsList
           posts={topPosts}
           getPosts={(page: string) => getPosts(setTopPosts, "news", page)}
           postsType="top"
-          
         />
       </Route>
       <Route path="/ask" key="ask">
@@ -93,6 +93,10 @@ function Routes() {
       </Route>
       <Route path="/about" key="about">
         <About />
+      </Route>
+
+      <Route path="/saved" key="saved">
+        <SavedPosts />
       </Route>
       <Route exact path={`/post/:id`} key="post">
         <PostComments />

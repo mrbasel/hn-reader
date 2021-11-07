@@ -100,6 +100,9 @@ function Header() {
           <Link as={RouterLink} to="/about" mx="4">
             About
           </Link>
+          <Link as={RouterLink} to="/saved" mx="4">
+            Saved
+          </Link>
 
           {/* <Link as={RouterLink} to="/settings" mx="4">
             <Button>Settings</Button>

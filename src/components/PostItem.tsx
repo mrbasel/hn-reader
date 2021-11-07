@@ -3,15 +3,18 @@ import { Link as RouterLink, useLocation } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
 
 import Post from "../interfaces/Post";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface PostItemProps {
   post: Post;
   index?: number;
+  isSaved?: boolean;
+  savePost: (postId: number) => void;
 }
 
 function PostItem(props: PostItemProps) {
   const { pathname } = useLocation();
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     if (pathname.includes("post")) document.title = `${props.post.title} - HN`;
@@ -105,6 +108,16 @@ function PostItem(props: PostItemProps) {
           ) : (
             ""
           )}
+
+          <Text
+            as="button"
+            color="whiteAlpha.700"
+            onClick={() => {
+              props.savePost(props.post.id);
+            }}
+          >
+            {props.isSaved ? "Saved ✨" : "Save"}
+          </Text>
         </HStack>
         {props.post.content && (
           <Text

@@ -36,7 +36,7 @@ function PostComments() {
 
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
-      <PostItem key={postData?.id} post={postData!} />
+      <PostItem key={postData?.id} post={postData!} savePost={() => {}} />
 
       {postData?.comments_count === 0 && (
         <Center h="20vh">
