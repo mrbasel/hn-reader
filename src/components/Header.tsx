@@ -6,15 +6,11 @@ import {
   useMediaQuery,
   Icon,
   IconButton,
+  MenuDivider,
 } from "@chakra-ui/react";
 import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
 function Header() {
   const [isSmallerThan800] = useMediaQuery("(max-width: 800px)");
@@ -71,6 +67,13 @@ function Header() {
                 >
                   Jobs
                 </MenuItem>
+                <MenuDivider />
+                <MenuItem
+                  color={pathname.includes("about") ? "orange" : ""}
+                  onClick={() => history.push("/about")}
+                >
+                  About
+                </MenuItem>
               </MenuList>
             </Menu>
           ) : (
@@ -97,9 +100,6 @@ function Header() {
           </Link>
         </Heading>
         <Box position="absolute" right="3">
-          <Link as={RouterLink} to="/about" mx="4">
-            About
-          </Link>
           <Link as={RouterLink} to="/saved" mx="4">
             Saved
           </Link>
