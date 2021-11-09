@@ -14,7 +14,6 @@ interface PostItemProps {
 
 function PostItem(props: PostItemProps) {
   const { pathname } = useLocation();
-  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     if (pathname.includes("post")) document.title = `${props.post.title} - HN`;
