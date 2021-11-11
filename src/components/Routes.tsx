@@ -13,6 +13,7 @@ function Routes() {
   const [showPosts, setShowPosts] = useState<Post[]>([]);
   const [newPosts, setNewPosts] = useState<Post[]>([]);
   const [jobPosts, setJobPosts] = useState<Post[]>([]);
+  const [savedPosts, setSavedPosts] = useState<number[]>([]);
 
   async function getPosts(
     setPosts: (posts: Post[]) => void,
@@ -61,6 +62,8 @@ function Routes() {
           posts={topPosts}
           getPosts={(page: string) => getPosts(setTopPosts, "news", page)}
           postsType="top"
+          savedPosts={savedPosts}
+          setSavedPosts={(ids: number[]) => setSavedPosts(ids)}
         />
       </Route>
       <Route path="/ask" key="ask">
@@ -68,6 +71,8 @@ function Routes() {
           posts={askPosts}
           getPosts={(page: string) => getPosts(setAskPosts, "ask", page)}
           postsType="ask"
+          savedPosts={savedPosts}
+          setSavedPosts={(ids: number[]) => setSavedPosts(ids)}
         />
       </Route>
       <Route path="/show" key="show">
@@ -75,6 +80,8 @@ function Routes() {
           posts={showPosts}
           getPosts={(page: string) => getPosts(setShowPosts, "show", page)}
           postsType="show"
+          savedPosts={savedPosts}
+          setSavedPosts={(ids: number[]) => setSavedPosts(ids)}
         />
       </Route>
       <Route path="/newest" key="newest">
@@ -82,6 +89,8 @@ function Routes() {
           posts={newPosts}
           getPosts={(page: string) => getPosts(setNewPosts, "newest", page)}
           postsType="newest"
+          savedPosts={savedPosts}
+          setSavedPosts={(ids: number[]) => setSavedPosts(ids)}
         />
       </Route>
       <Route path="/jobs" key="jobs">
@@ -89,6 +98,8 @@ function Routes() {
           posts={jobPosts}
           getPosts={(page: string) => getPosts(setJobPosts, "jobs", page)}
           postsType="jobs"
+          savedPosts={savedPosts}
+          setSavedPosts={(ids: number[]) => setSavedPosts(ids)}
         />
       </Route>
       <Route path="/about" key="about">

@@ -10,16 +10,17 @@ interface PostsListProps {
   posts: Post[];
   getPosts: (page: string) => void;
   postsType: "top" | "ask" | "show" | "newest" | "jobs";
+  setSavedPosts: (postIds: number[]) => void;
+  savedPosts: number[];
 }
 
 function PostsList(props: PostsListProps) {
   const [page, setPage] = useState(1);
-  const [savedPosts, setSavedPosts] = useState<number[]>([]);
 
   useEffect(() => {
     if (props.posts.length === 0) props.getPosts(page.toString());
 
-    setSavedPosts(loadSavedPosts());
+    props.setSavedPosts(loadSavedPosts());
   }, []);
 
   const savePost = (postId: number) => {
@@ -31,7 +32,7 @@ function PostsList(props: PostsListProps) {
     if (posts.includes(postId)) posts.splice(posts.indexOf(postId), 1);
     else posts.push(postId);
 
-    setSavedPosts(posts);
+    props.setSavedPosts(posts);
     localStorage.setItem("posts", JSON.stringify(posts));
   };
 
@@ -62,7 +63,7 @@ function PostsList(props: PostsListProps) {
             key={post.id}
             index={i}
             post={post}
-            isSaved={savedPosts.includes(post.id)}
+            isSaved={props.savedPosts.includes(post.id)}
             savePost={savePost}
           />
         ))}
