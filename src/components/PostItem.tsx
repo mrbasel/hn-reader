@@ -3,11 +3,12 @@ import { Link as RouterLink, useLocation } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
 
 import Post from "../interfaces/Post";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface PostItemProps {
   post: Post;
   index?: number;
+  showContent?: boolean;
   isSaved?: boolean;
   savePost: (postId: number) => void;
 }
@@ -115,10 +116,10 @@ function PostItem(props: PostItemProps) {
               props.savePost(props.post.id);
             }}
           >
-            {props.isSaved ? "Saved ✨" : "Save"}
+            {props.isSaved ? "Unsave" : "Save"}
           </Text>
         </HStack>
-        {props.post.content && (
+        {props.post.content && props.showContent && (
           <Text
             className="comment"
             mt="3"

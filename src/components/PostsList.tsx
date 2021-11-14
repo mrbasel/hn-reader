@@ -4,7 +4,8 @@ import { Route } from "react-router-dom";
 
 import PostItem from "./PostItem";
 import Post from "../interfaces/Post";
-import { capitalizeFirstLetter, loadSavedPosts } from "../utils";
+import { capitalizeFirstLetter } from "../utils";
+import savedPostsStorage from "../savedPostsStorage";
 
 interface PostsListProps {
   posts: Post[];
@@ -19,8 +20,7 @@ function PostsList(props: PostsListProps) {
 
   useEffect(() => {
     if (props.posts.length === 0) props.getPosts(page.toString());
-
-    props.setSavedPosts(loadSavedPosts());
+    props.setSavedPosts(savedPostsStorage.loadPosts());
   }, []);
 
   const savePost = (postId: number) => {
