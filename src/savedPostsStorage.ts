@@ -23,7 +23,7 @@ const removePost = (postId: number) => {
     let postIds = loadPosts();
 
     if (postIds.includes(postId))
-        postIds = postIds.filter(id => id != postId);
+        postIds = postIds.filter(id => id !== postId);
     localStorage.setItem("posts", JSON.stringify(postIds));
 }
 

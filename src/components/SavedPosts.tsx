@@ -40,7 +40,7 @@ export default function SavedPosts() {
           post={post}
           isSaved
           savePost={(postId: number) => {
-            setPosts(posts.filter((post) => post.id != postId));
+            setPosts(posts.filter((post) => post.id !== postId));
             savedPostsStorage.removePost(postId);
           }}
         />

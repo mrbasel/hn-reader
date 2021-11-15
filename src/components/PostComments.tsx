@@ -7,8 +7,14 @@ import Post from "../interfaces/Post";
 import Comment from "../interfaces/Comment";
 import PostComment from "./PostComment";
 import PostItem from "./PostItem";
+import savedPostsStorage from "../savedPostsStorage";
 
-function PostComments() {
+interface PostCommentsProps {
+  setSavedPosts: (postIds: number[]) => void;
+  savedPosts: number[];
+}
+
+function PostComments(props: PostCommentsProps) {
   let { id } = useParams<{ id: string }>();
   const [comments, setComments] = useState<Comment[]>([]);
   const [postData, setPost] = useState<Post>();
@@ -39,7 +45,22 @@ function PostComments() {
       <PostItem
         key={postData?.id}
         post={postData!}
-        savePost={() => {}}
+        isSaved={
+          postData !== undefined && props.savedPosts.includes(postData.id)
+        }
+        savePost={() => {
+          if (postData === undefined) return;
+
+          let posts: number[] = savedPostsStorage.loadPosts();
+          if (postData !== undefined && props.savedPosts.includes(postData.id)) {
+            savedPostsStorage.removePost(postData.id);
+            posts = posts.filter((id) => id !== postData.id);
+          } else {
+            savedPostsStorage.addPost(postData.id);
+            posts.push(postData.id);
+          }
+          props.setSavedPosts(posts);
+        }}
         showContent
       />
 
