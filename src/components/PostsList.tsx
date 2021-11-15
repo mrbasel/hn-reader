@@ -1,4 +1,4 @@
-import { Box, Button, Center, Heading, Spinner } from "@chakra-ui/react";
+import { Box, Button, Center, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
 

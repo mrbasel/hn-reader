@@ -110,7 +110,10 @@ function Routes() {
         <SavedPosts />
       </Route>
       <Route exact path={`/post/:id`} key="post">
-        <PostComments />
+        <PostComments
+          savedPosts={savedPosts}
+          setSavedPosts={(ids: number[]) => setSavedPosts(ids)}
+        />
       </Route>
       <Redirect to="/top" />
     </Switch>
