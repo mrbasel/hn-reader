@@ -8,7 +8,12 @@ import Comment from "../interfaces/Comment";
 import PostComment from "./PostComment";
 import PostItem from "./PostItem";
 
-function PostComments() {
+interface PostCommentsProps {
+  // setSavedPosts: (postIds: number[]) => void;
+  // savedPosts: number[];
+}
+
+function PostComments(props: PostCommentsProps) {
   let { id } = useParams<{ id: string }>();
   const [comments, setComments] = useState<Comment[]>([]);
   const [postData, setPost] = useState<Post>();
@@ -36,7 +41,7 @@ function PostComments() {
 
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
-      <PostItem key={postData?.id} post={postData!} />
+      <PostItem key={postData?.id} post={postData!} showContent />
 
       {postData?.comments_count === 0 && (
         <Center h="20vh">

@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { Box, ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import theme from "./theme";
@@ -10,9 +10,11 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Router>
-        <ScrollToTop />
-        <Header />
-        <Routes />
+        <Box height="90vh">
+          <ScrollToTop />
+          <Header />
+          <Routes />
+        </Box>
       </Router>
     </ChakraProvider>
   );

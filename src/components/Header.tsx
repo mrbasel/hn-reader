@@ -6,32 +6,34 @@ import {
   useMediaQuery,
   Icon,
   IconButton,
+  MenuDivider,
 } from "@chakra-ui/react";
 import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
 function Header() {
   const [isSmallerThan800] = useMediaQuery("(max-width: 800px)");
   const history = useHistory();
   const { pathname } = useLocation();
+
   return (
     <Box as="nav" borderBottom="1px solid orange">
       <Flex
         position="relative"
-        justifyContent="center"
+        justifyContent={isSmallerThan800 ? "space-between" : "space-around"}
         alignItems="center"
         pb="3"
         mt="2"
         maxW="1500px"
-        mx="auto"
+        mx="8"
       >
-        <Box position="absolute" left="3">
+        <Heading>
+          <Link as={RouterLink} to="/top">
+            HN News
+          </Link>
+        </Heading>
+        <Box>
           {isSmallerThan800 ? (
             <Menu>
               <MenuButton
@@ -71,6 +73,13 @@ function Header() {
                 >
                   Jobs
                 </MenuItem>
+                <MenuDivider />
+                <MenuItem
+                  color={pathname.includes("about") ? "orange" : ""}
+                  onClick={() => history.push("/about")}
+                >
+                  About
+                </MenuItem>
               </MenuList>
             </Menu>
           ) : (
@@ -87,23 +96,11 @@ function Header() {
               <Link as={RouterLink} to="/jobs" mx="4">
                 Jobs
               </Link>
+              {/* <Link as={RouterLink} to="/saved" mx="4">
+                Saved
+              </Link> */}
             </Box>
           )}
-        </Box>
-
-        <Heading>
-          <Link as={RouterLink} to="/top">
-            {isSmallerThan800 ? "HN" : "HN News"}
-          </Link>
-        </Heading>
-        <Box position="absolute" right="3">
-          <Link as={RouterLink} to="/about" mx="4">
-            About
-          </Link>
-
-          {/* <Link as={RouterLink} to="/settings" mx="4">
-            <Button>Settings</Button>
-          </Link> */}
         </Box>
       </Flex>
     </Box>

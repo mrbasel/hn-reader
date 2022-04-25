@@ -8,6 +8,9 @@ import { useEffect } from "react";
 interface PostItemProps {
   post: Post;
   index?: number;
+  showContent?: boolean;
+  // isSaved?: boolean;
+  // savePost: (postId: number) => void;
 }
 
 function PostItem(props: PostItemProps) {
@@ -105,8 +108,18 @@ function PostItem(props: PostItemProps) {
           ) : (
             ""
           )}
+
+          {/* <Text
+            as="button"
+            color="whiteAlpha.700"
+            onClick={() => {
+              props.savePost(props.post.id);
+            }}
+          >
+            {props.isSaved ? "Unsave" : "Save"}
+          </Text> */}
         </HStack>
-        {props.post.content && (
+        {props.post.content && props.showContent && (
           <Text
             className="comment"
             mt="3"
