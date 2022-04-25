@@ -9,8 +9,8 @@ interface PostItemProps {
   post: Post;
   index?: number;
   showContent?: boolean;
-  isSaved?: boolean;
-  savePost: (postId: number) => void;
+  // isSaved?: boolean;
+  // savePost: (postId: number) => void;
 }
 
 function PostItem(props: PostItemProps) {
@@ -109,7 +109,7 @@ function PostItem(props: PostItemProps) {
             ""
           )}
 
-          <Text
+          {/* <Text
             as="button"
             color="whiteAlpha.700"
             onClick={() => {
@@ -117,7 +117,7 @@ function PostItem(props: PostItemProps) {
             }}
           >
             {props.isSaved ? "Unsave" : "Save"}
-          </Text>
+          </Text> */}
         </HStack>
         {props.post.content && props.showContent && (
           <Text

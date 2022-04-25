@@ -1,50 +1,52 @@
-import { Box, Center, Text } from "@chakra-ui/layout";
-import axios from "axios";
-import { useEffect, useState } from "react";
+export {};
 
-import savedPostsStorage from "../savedPostsStorage";
-import Post from "../interfaces/Post";
-import PostItem from "./PostItem";
+// import { Box, Center, Text } from "@chakra-ui/layout";
+// import axios from "axios";
+// import { useEffect, useState } from "react";
 
-interface SavedPostsProps {}
+// import savedPostsStorage from "../savedPostsStorage";
+// import Post from "../interfaces/Post";
+// import PostItem from "./PostItem";
 
-export default function SavedPosts() {
-  const [posts, setPosts] = useState<Post[]>([]);
+// interface SavedPostsProps {}
 
-  useEffect(() => {
-    Promise.all(fetchPostsData(savedPostsStorage.loadPosts())).then((posts) =>
-      setPosts(posts)
-    );
-  }, []);
+// export default function SavedPosts() {
+//   const [posts, setPosts] = useState<Post[]>([]);
 
-  const fetchPostsData = (ids: number[]) => {
-    return ids.map(async (id) => {
-      const res = await axios.get<Post>(
-        `https://node-hnapi.herokuapp.com/item/${id}`
-      );
-      return res.data;
-    });
-  };
+//   useEffect(() => {
+//     Promise.all(fetchPostsData(savedPostsStorage.loadPosts())).then((posts) =>
+//       setPosts(posts)
+//     );
+//   }, []);
 
-  if (savedPostsStorage.loadPosts().length === 0)
-    return (
-      <Center height="50%">
-        <Text fontSize="x-large">No saved posts</Text>
-      </Center>
-    );
+//   const fetchPostsData = (ids: number[]) => {
+//     return ids.map(async (id) => {
+//       const res = await axios.get<Post>(
+//         `https://node-hnapi.herokuapp.com/item/${id}`
+//       );
+//       return res.data;
+//     });
+//   };
 
-  return (
-    <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
-      {posts.map((post) => (
-        <PostItem
-          post={post}
-          isSaved
-          savePost={(postId: number) => {
-            setPosts(posts.filter((post) => post.id !== postId));
-            savedPostsStorage.removePost(postId);
-          }}
-        />
-      ))}
-    </Box>
-  );
-}
+//   if (savedPostsStorage.loadPosts().length === 0)
+//     return (
+//       <Center height="50%">
+//         <Text fontSize="x-large">No saved posts</Text>
+//       </Center>
+//     );
+
+//   return (
+//     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
+//       {posts.map((post) => (
+//         <PostItem
+//           post={post}
+//           // isSaved
+//           savePost={(postId: number) => {
+//             setPosts(posts.filter((post) => post.id !== postId));
+//             savedPostsStorage.removePost(postId);
+//           }}
+//         />
+//       ))}
+//     </Box>
+//   );
+// }
