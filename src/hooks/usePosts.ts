@@ -26,7 +26,6 @@ export function usePosts({ postType, pageNumber }: usePostsProps) {
 
   return {
     posts: (data ?? []) as Post[],
-    // posts: [],
     isLoading: !error && !data,
     error,
   };

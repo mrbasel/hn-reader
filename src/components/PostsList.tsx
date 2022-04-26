@@ -17,7 +17,7 @@ function PostsList({ postsType }: PostsListProps) {
   const { posts } = usePosts({ postType: postsType, pageNumber: page });
 
   useEffect(() => {
-    if (postsType === "news") document.title = "HN App";
+    if (postsType === "newest") document.title = "HN App";
     else document.title = `${capitalizeFirstLetter(postsType)} - HN`;
   }, []);
 

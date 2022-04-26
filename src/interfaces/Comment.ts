@@ -1,5 +1,5 @@
 
-export default interface Comment {
+export interface Comment {
     id: number;
     level: number;
     user: string;

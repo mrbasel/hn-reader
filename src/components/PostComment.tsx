@@ -1,7 +1,7 @@
 import { Box, HStack, Link, Text, Icon } from "@chakra-ui/react";
 import { useState } from "react";
-import Comment from "../interfaces/Comment";
 import { BsChevronBarContract, BsChevronBarExpand } from "react-icons/bs";
+import { Comment } from "../interfaces";
 import "../styles/comment.css";
 
 interface PostCommentProps {
