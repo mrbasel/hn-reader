@@ -4,6 +4,7 @@ import { FiExternalLink } from "react-icons/fi";
 
 import Post from "../interfaces/Post";
 import { useEffect } from "react";
+import { useSetPageTitle } from "../hooks/useSetPageTitle";
 
 interface PostItemProps {
   post: Post;
@@ -16,9 +17,9 @@ interface PostItemProps {
 function PostItem(props: PostItemProps) {
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    if (pathname.includes("post")) document.title = `${props.post.title} - HN`;
-  }, []);
+  useSetPageTitle(
+    pathname.includes("post") ? `${props.post.title} - HN` : null
+  );
 
   return (
     <Flex my="4" p="3" border="1px solid #333" bgColor="#262626">

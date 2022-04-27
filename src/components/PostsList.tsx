@@ -7,6 +7,8 @@ import Post from "../interfaces/Post";
 import { capitalizeFirstLetter } from "../utils";
 import { usePosts } from "../hooks/usePosts";
 import { PostType } from "../interfaces/PostType";
+import { Loading } from "./Loading";
+import { useSetPageTitle } from "../hooks/useSetPageTitle";
 
 interface PostsListProps {
   postsType: PostType;
@@ -14,21 +16,18 @@ interface PostsListProps {
 
 function PostsList({ postsType }: PostsListProps) {
   const [page, setPage] = useState(1);
-  const { posts } = usePosts({ postType: postsType, pageNumber: page });
+  const { posts, isLoading } = usePosts({
+    postType: postsType,
+    pageNumber: page,
+  });
 
-  useEffect(() => {
-    if (postsType === "newest") document.title = "HN App";
-    else document.title = `${capitalizeFirstLetter(postsType)} - HN`;
-  }, []);
+  useSetPageTitle(
+    postsType === "newest"
+      ? "HN App"
+      : `${capitalizeFirstLetter(postsType)} - HN`
+  );
 
-  // Show loading spinner if posts havent loaded yet
-  if (posts.length === 0) {
-    return (
-      <Center height="90vh">
-        <Spinner size="xl" />
-      </Center>
-    );
-  }
+  if (isLoading) return <Loading />;
 
   return (
     <Route path="/" key="root">
