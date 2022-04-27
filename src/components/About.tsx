@@ -1,11 +1,8 @@
 import { Box, Heading, Link, Text } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useSetPageTitle } from "../hooks/useSetPageTitle";
 
 function About() {
-  useEffect(() => {
-    document.title = "About - HN";
-  }, []);
-
+  useSetPageTitle("About - HN");
   return (
     <Box my="8" p="4" textAlign="left" mx="auto" maxW="600px">
       <Heading>About</Heading>

@@ -1,49 +1,27 @@
-import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { Box, Center, Heading } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
-import Post from "../interfaces/Post";
-import Comment from "../interfaces/Comment";
 import PostComment from "./PostComment";
 import PostItem from "./PostItem";
+import { useComments } from "../hooks/useComments";
+import { Comment } from "../interfaces";
+import { Loading } from "./Loading";
+import { Error } from "./Error";
 
-interface PostCommentsProps {
-  // setSavedPosts: (postIds: number[]) => void;
-  // savedPosts: number[];
-}
-
-function PostComments(props: PostCommentsProps) {
+function PostComments() {
   let { id } = useParams<{ id: string }>();
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [postData, setPost] = useState<Post>();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get(
-        `https://node-hnapi.herokuapp.com/item/${id}`
-      );
-      setPost(res.data);
-      setComments(res.data.comments);
-    };
+  const { post, comments, isLoading, error } = useComments(id);
 
-    fetchData();
-  }, [id]);
+  if (error) return <Error />;
 
-  // Show loading spinner if the post or comments havent loaded yet
-  if (comments.length === 0 && !postData) {
-    return (
-      <Center height="90vh">
-        <Spinner size="xl" />
-      </Center>
-    );
-  }
+  if (isLoading) return <Loading />;
 
   return (
     <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
-      <PostItem key={postData?.id} post={postData!} showContent />
+      <PostItem key={post?.id} post={post!} showContent />
 
-      {postData?.comments_count === 0 && (
+      {post?.comments_count === 0 && (
         <Center h="20vh">
           <Heading size="md">No comments yet</Heading>
         </Center>
@@ -54,7 +32,7 @@ function PostComments(props: PostCommentsProps) {
           key={comment.id}
           comment={comment}
           responses={comment.comments}
-          orginalAuthor={postData?.user}
+          orginalAuthor={post.user}
           isTopLevel={true}
         />
       ))}

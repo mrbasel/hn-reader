@@ -11,7 +11,7 @@ function Routes() {
   return (
     <Switch>
       <Route path="/top">
-        <PostsList postsType="newest" />
+        <PostsList postsType="news" />
       </Route>
       <Route path="/ask" key="ask">
         <PostsList postsType="ask" />
