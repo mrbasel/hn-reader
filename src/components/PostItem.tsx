@@ -30,7 +30,12 @@ function PostItem(props: PostItemProps) {
         </Heading>
       )}
 
-      <Flex flexDir="column" justifyContent="space-between" textAlign="left">
+      <Flex
+        flexDir="column"
+        justifyContent="space-between"
+        textAlign="left"
+        w="100%"
+      >
         <Heading as="h3" size="sm">
           {props.post.url.includes("http") ? (
             <Link
