@@ -32,7 +32,7 @@ function PostComments() {
           key={comment.id}
           comment={comment}
           responses={comment.comments}
-          orginalAuthor={"post?.user"}
+          orginalAuthor={post.user}
           isTopLevel={true}
         />
       ))}
