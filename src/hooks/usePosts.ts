@@ -1,7 +1,7 @@
+import Post from "@/interfaces/Post";
 import useSWR from "swr";
-import Post from "../interfaces/Post";
-import { PostType } from "../interfaces/PostType";
-import { fetcher } from "../utils";
+import { fetcher } from "utils";
+import { PostType } from "../interfaces";
 
 interface usePostsProps {
   postType: PostType;

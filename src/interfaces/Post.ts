@@ -1,4 +1,4 @@
-import { Comment } from "./Comment";
+import { Comment } from "@/interfaces/Comment";
 
 export default interface Post {
   id: number;
