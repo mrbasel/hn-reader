@@ -1,6 +1,7 @@
 import { Box, ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
+import React from "react";
 import theme from "./theme";
 import Header from "./components/Header";
 import ScrollToTop from "./components/ScrollToTop";
