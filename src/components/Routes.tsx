@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import About from "./About";
 import PostComments from "./PostComments";
 import PostsList from "./PostsList";
 
@@ -23,13 +22,7 @@ function Routes() {
         <Route path="/jobs" key="jobs">
           <PostsList postsType="jobs" />
         </Route>
-        <Route path="/about" key="about">
-          <About />
-        </Route>
 
-        {/* <Route path="/saved" key="saved">
-        <SavedPosts />
-      </Route> */}
         <Route exact path={`/post/:id`} key="post">
           <PostComments />
         </Route>

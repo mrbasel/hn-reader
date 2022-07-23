@@ -37,8 +37,6 @@ function PostsList({ postsType }: PostsListProps) {
             key={post.id}
             index={i}
             post={post}
-            // isSaved={props.savedPosts.includes(post.id)}
-            // savePost={savePost}
           />
         ))}
 

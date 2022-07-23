@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { Comment } from "../interfaces";
 import Post from "../interfaces/Post";
-import fetcher from "./usePosts";
+import { fetcher } from "../utils";
 
 export function useComments(id: string) {
   const { data: res, error } = useSWR(
