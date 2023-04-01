@@ -73,13 +73,6 @@ function Header() {
                 >
                   Jobs
                 </MenuItem>
-                <MenuDivider />
-                <MenuItem
-                  color={pathname.includes("about") ? "orange" : ""}
-                  onClick={() => history.push("/about")}
-                >
-                  About
-                </MenuItem>
               </MenuList>
             </Menu>
           ) : (
