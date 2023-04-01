@@ -35,15 +35,18 @@ function PostsList({ postsType }: PostsListProps) {
           <PostItem key={post.id} index={i} post={post} />
         ))}
 
-        <Center>
+        <Center gap={2}>
           <Button
-            display={page > 5 ? "none" : "block"}
-            mt="4"
-            onClick={() => {
-              setPage(page + 1);
-            }}
+            border={page === 1 ? "1px solid orange" : undefined}
+            onClick={() => setPage(1)}
           >
-            Load more
+            1
+          </Button>
+          <Button
+            border={page === 2 ? "1px solid orange" : undefined}
+            onClick={() => setPage(2)}
+          >
+            2
           </Button>
         </Center>
       </Box>
