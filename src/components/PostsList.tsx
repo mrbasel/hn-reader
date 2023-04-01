@@ -1,14 +1,13 @@
-import { Box, Button, Center, Spinner } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { usePosts } from "@/hooks/usePosts";
+import { useSetPageTitle } from "@/hooks/useSetPageTitle";
+import Post from "@/interfaces/Post";
+import { Box, Button, Center } from "@chakra-ui/react";
+import { useState } from "react";
 import { Route } from "react-router-dom";
-
-import PostItem from "./PostItem";
-import Post from "../interfaces/Post";
-import { capitalizeFirstLetter } from "../utils";
-import { usePosts } from "../hooks/usePosts";
-import { PostType } from "../interfaces/PostType";
+import { capitalizeFirstLetter } from "utils";
+import { PostType } from "../interfaces";
 import { Loading } from "./Loading";
-import { useSetPageTitle } from "../hooks/useSetPageTitle";
+import PostItem from "./PostItem";
 
 interface PostsListProps {
   postsType: PostType;
@@ -33,24 +32,21 @@ function PostsList({ postsType }: PostsListProps) {
     <Route path="/" key="root">
       <Box maxW="960px" mx="auto" mt="8" p={4} color="white">
         {posts.map((post: Post, i: number) => (
-          <PostItem
-            key={post.id}
-            index={i}
-            post={post}
-            // isSaved={props.savedPosts.includes(post.id)}
-            // savePost={savePost}
-          />
+          <PostItem key={post.id} index={i} post={post} />
         ))}
 
-        <Center>
+        <Center gap={2}>
           <Button
-            display={page > 5 ? "none" : "block"}
-            mt="4"
-            onClick={() => {
-              setPage(page + 1);
-            }}
+            border={page === 1 ? "1px solid orange" : undefined}
+            onClick={() => setPage(1)}
           >
-            Load more
+            1
+          </Button>
+          <Button
+            border={page === 2 ? "1px solid orange" : undefined}
+            onClick={() => setPage(2)}
+          >
+            2
           </Button>
         </Center>
       </Box>

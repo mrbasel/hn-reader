@@ -1,8 +1,16 @@
-import { Box, HStack, Link, Text, Icon } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  Link,
+  Text,
+  Icon,
+  IconButton,
+  Button,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { BsChevronBarContract, BsChevronBarExpand } from "react-icons/bs";
 import { Comment } from "../interfaces";
-import "../styles/comment.css";
+import "@/styles/comment.css";
 
 interface PostCommentProps {
   comment: Comment;
@@ -43,22 +51,16 @@ function PostComment(props: PostCommentProps) {
           <Text>{props.comment.time_ago}</Text>
         </HStack>
 
-        {/* Hide/collapse icons */}
-        {hidden ? (
-          <Icon
-            as={BsChevronBarExpand}
-            _hover={{ color: "#fff" }}
-            cursor="pointer"
-            onClick={() => setHidden(!hidden)}
-          />
-        ) : (
-          <Icon
-            as={BsChevronBarContract}
-            _hover={{ color: "#fff" }}
-            cursor="pointer"
-            onClick={() => setHidden(!hidden)}
-          />
-        )}
+        {/* Hide/show button */}
+        <Button
+          display="flex"
+          justifyContent="center"
+          variant="unstyled"
+          _hover={{ color: "#fff" }}
+          onClick={() => setHidden(!hidden)}
+        >
+          {hidden ? <BsChevronBarExpand /> : <BsChevronBarContract />}
+        </Button>
       </HStack>
       <Text
         className="comment"

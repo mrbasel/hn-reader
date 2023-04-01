@@ -1,12 +1,10 @@
+import { useComments } from "@/hooks/useComments";
 import { Box, Center, Heading } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-
-import PostComment from "./PostComment";
-import PostItem from "./PostItem";
-import { useComments } from "../hooks/useComments";
-import { Comment } from "../interfaces";
 import { Loading } from "./Loading";
 import { Error } from "./Error";
+import PostComment from "./PostComment";
+import PostItem from "./PostItem";
 
 function PostComments() {
   let { id } = useParams<{ id: string }>();

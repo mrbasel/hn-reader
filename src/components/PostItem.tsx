@@ -2,16 +2,13 @@ import { Box, Flex, Heading, HStack, Link, Text, Icon } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
 
-import Post from "../interfaces/Post";
-import { useEffect } from "react";
 import { useSetPageTitle } from "../hooks/useSetPageTitle";
+import Post from "@/interfaces/Post";
 
 interface PostItemProps {
   post: Post;
   index?: number;
   showContent?: boolean;
-  // isSaved?: boolean;
-  // savePost: (postId: number) => void;
 }
 
 function PostItem(props: PostItemProps) {
